@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ecole.controller.AccueilController"
+      spacing="20">
+    
+    <Label text="Bienvenue sur le système de gestion d'école" styleClass="label-title"/>
+    
+    <!-- Cartes de statistiques -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+        </columnConstraints>
+        
+        <!-- Carte Étudiants -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="0">
+            <Label text="👨‍🎓" style="-fx-font-size: 36px;"/>
+            <Label fx:id="lblNbEtudiants" text="0" styleClass="stat-number"/>
+            <Label text="Étudiants" styleClass="stat-label"/>
+        </VBox>
+        
+        <!-- Carte Enseignants -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="1">
+            <Label text="👨‍🏫" style="-fx-font-size: 36px;"/>
+            <Label fx:id="lblNbEnseignants" text="0" styleClass="stat-number"/>
+            <Label text="Enseignants" styleClass="stat-label"/>
+        </VBox>
+        
+        <!-- Carte Classes -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <Label text="🏫" style="-fx-font-size: 36px;"/>
+            <Label fx:id="lblNbClasses" text="0" styleClass="stat-number"/>
+            <Label text="Classes" styleClass="stat-label"/>
+        </VBox>
+        
+        <!-- Carte Matières -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="3">
+            <Label text="📖" style="-fx-font-size: 36px;"/>
+            <Label fx:id="lblNbMatieres" text="0" styleClass="stat-number"/>
+            <Label text="Matières" styleClass="stat-label"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Informations rapides -->
+    <VBox styleClass="panel" spacing="15">
+        <Label text="Informations rapides" styleClass="label-subtitle"/>
+        <Separator/>
+        
+        <HBox spacing="20">
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <Label text="📊 Statistiques générales" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblStatistiques" text="Chargement..."/>
+            </VBox>
+        </HBox>
+    </VBox>
+    
+    <!-- Raccourcis rapides -->
+    <VBox styleClass="panel" spacing="15">
+        <Label text="Actions rapides" styleClass="label-subtitle"/>
+        <Separator/>
+        
+        <HBox spacing="15">
+            <Button text="➕ Nouvel étudiant" onAction="#ajouterEtudiant" styleClass="button-success"/>
+            <Button text="➕ Nouvel enseignant" onAction="#ajouterEnseignant" styleClass="button-success"/>
+            <Button text="➕ Nouvelle classe" onAction="#ajouterClasse" styleClass="button-success"/>
+            <Button text="📊 Voir les rapports" onAction="#voirRapports"/>
+        </HBox>
+    </VBox>
+</VBox>

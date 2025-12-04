@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.ecole.controller.DashboardController"
+            stylesheets="@../css/style.css">
+    
+    <!-- Menu latéral -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="250" spacing="10">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+            
+            <Label text="📚 GESTION D'ÉCOLE" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;">
+                <padding>
+                    <Insets bottom="20"/>
+                </padding>
+            </Label>
+            
+            <Separator style="-fx-background-color: #455A64;"/>
+            
+            <Label fx:id="userLabel" style="-fx-text-fill: white; -fx-font-size: 12px;">
+                <padding>
+                    <Insets top="10" bottom="10"/>
+                </padding>
+            </Label>
+            
+            <Separator style="-fx-background-color: #455A64;"/>
+            
+            <!-- Menu principal -->
+            <VBox spacing="5" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                
+                <Button fx:id="btnAccueil" text="🏠 Accueil" onAction="#showAccueil" maxWidth="Infinity" styleClass="button-active"/>
+                <Button fx:id="btnEtudiants" text="👨‍🎓 Étudiants" onAction="#showEtudiants" maxWidth="Infinity"/>
+                <Button fx:id="btnEnseignants" text="👨‍🏫 Enseignants" onAction="#showEnseignants" maxWidth="Infinity"/>
+                <Button fx:id="btnClasses" text="🏫 Classes" onAction="#showClasses" maxWidth="Infinity"/>
+                <Button fx:id="btnMatieres" text="📖 Matières" onAction="#showMatieres" maxWidth="Infinity"/>
+                <Button fx:id="btnNotes" text="📝 Notes" onAction="#showNotes" maxWidth="Infinity"/>
+                <Button fx:id="btnSalles" text="🚪 Salles" onAction="#showSalles" maxWidth="Infinity"/>
+                <Button fx:id="btnEmplois" text="📅 Emplois du temps" onAction="#showEmplois" maxWidth="Infinity"/>
+                <Button fx:id="btnUtilisateurs" text="👤 Utilisateurs" onAction="#showUtilisateurs" maxWidth="Infinity"/>
+                <Button fx:id="btnRapports" text="📊 Rapports" onAction="#showRapports" maxWidth="Infinity"/>
+            </VBox>
+            
+            <Separator style="-fx-background-color: #455A64;"/>
+            
+            <Button text="🚪 Déconnexion" onAction="#handleLogout" maxWidth="Infinity" styleClass="button-danger"/>
+        </VBox>
+    </left>
+    
+    <!-- Contenu principal -->
+    <center>
+        <VBox>
+            <!-- En-tête -->
+            <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label fx:id="titleLabel" text="Tableau de bord" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            </HBox>
+            
+            <!-- Zone de contenu dynamique -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background: #f5f5f5;">
+                <StackPane fx:id="contentArea" style="-fx-background-color: #f5f5f5;">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                </StackPane>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.ecole.controller.UtilisateursController" spacing="20">
+    <HBox spacing="15">
+        <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
+        <Button text="✏️ Modifier" onAction="#handleModifier"/>
+        <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Actualiser" onAction="#handleActualiser"/>
+    </HBox>
+    <TableView fx:id="tableUtilisateurs" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+            <TableColumn text="Nom d'utilisateur" prefWidth="200"><cellValueFactory><PropertyValueFactory property="nomUtilisateur"/></cellValueFactory></TableColumn>
+            <TableColumn text="Rôle" prefWidth="150"><cellValueFactory><PropertyValueFactory property="role"/></cellValueFactory></TableColumn>
+            <TableColumn text="ID Référence" prefWidth="150"><cellValueFactory><PropertyValueFactory property="referenceId"/></cellValueFactory></TableColumn>
+        </columns>
+    </TableView>
+    <Label fx:id="lblTotal"/>
+</VBox>

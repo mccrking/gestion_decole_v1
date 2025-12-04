@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ecole.controller.EnseignantsController"
+      spacing="20">
+    
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
+        <Button text="✏️ Modifier" onAction="#handleModifier"/>
+        <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍 Rechercher..." prefWidth="300"/>
+        <Button text="🔄 Actualiser" onAction="#handleActualiser"/>
+    </HBox>
+    
+    <TableView fx:id="tableEnseignants" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50">
+                <cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Nom" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="nom"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Prénom" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="prenom"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Spécialité" prefWidth="200">
+                <cellValueFactory><PropertyValueFactory property="specialite"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Contact" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="contact"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Email" prefWidth="250">
+                <cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+    
+    <Label fx:id="lblTotal" text="Total: 0 enseignant(s)"/>
+</VBox>

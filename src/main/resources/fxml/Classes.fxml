@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.ecole.controller.ClassesController" spacing="20">
+    <HBox spacing="15">
+        <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
+        <Button text="✏️ Modifier" onAction="#handleModifier"/>
+        <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Actualiser" onAction="#handleActualiser"/>
+    </HBox>
+    <TableView fx:id="tableClasses" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+            <TableColumn text="Niveau" prefWidth="200"><cellValueFactory><PropertyValueFactory property="niveau"/></cellValueFactory></TableColumn>
+            <TableColumn text="Section" prefWidth="200"><cellValueFactory><PropertyValueFactory property="section"/></cellValueFactory></TableColumn>
+            <TableColumn text="Capacité" prefWidth="100"><cellValueFactory><PropertyValueFactory property="capacite"/></cellValueFactory></TableColumn>
+        </columns>
+    </TableView>
+    <Label fx:id="lblTotal"/>
+</VBox>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ecole.controller.EtudiantsController"
+      spacing="20">
+    
+    <!-- Barre d'outils -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
+        <Button text="✏️ Modifier" onAction="#handleModifier" disable="${tableEtudiants.selectionModel.selectedItem == null}"/>
+        <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍 Rechercher un étudiant..." prefWidth="300"/>
+        <Button text="🔄 Actualiser" onAction="#handleActualiser"/>
+    </HBox>
+    
+    <!-- TableView -->
+    <TableView fx:id="tableEtudiants" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50">
+                <cellValueFactory>
+                    <PropertyValueFactory property="id"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Nom" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nom"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Prénom" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="prenom"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Date de naissance" prefWidth="130">
+                <cellValueFactory>
+                    <PropertyValueFactory property="dateNaissance"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Classe ID" prefWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="classeId"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Contact" prefWidth="120">
+                <cellValueFactory>
+                    <PropertyValueFactory property="contact"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Email" prefWidth="200">
+                <cellValueFactory>
+                    <PropertyValueFactory property="email"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Adresse" prefWidth="200">
+                <cellValueFactory>
+                    <PropertyValueFactory property="adresse"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+    </TableView>
+    
+    <!-- Informations -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label fx:id="lblTotal" text="Total: 0 étudiant(s)"/>
+    </HBox>
+</VBox>

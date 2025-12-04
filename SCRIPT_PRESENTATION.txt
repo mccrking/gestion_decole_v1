@@ -1,0 +1,826 @@
+═══════════════════════════════════════════════════════════════════════════════
+    SCRIPT DE PRÉSENTATION - COURS JAVA-FX
+    Plateforme de Gestion d'École
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 DURÉE TOTALE : 15-20 minutes
+👥 À ADAPTER selon le nombre de personnes dans votre groupe
+
+
+═══════════════════════════════════════════════════════════════════════════════
+1️⃣ INTRODUCTION (2 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Bonjour à tous,
+
+Aujourd'hui, nous allons vous présenter un cours complet sur JavaFX à travers un 
+projet concret : une plateforme de gestion d'école.
+
+Notre présentation couvrira tous les aspects demandés :
+- La création d'un projet JavaFX avec Maven
+- Les différents layouts (GridPane, VBox, HBox, BorderPane)
+- La gestion des événements
+- Les alertes et dialogues
+- L'utilisation du FXML
+- Le styling avec CSS
+
+Et nous terminerons par une démonstration en direct de l'application.
+
+Commençons par la création du projet."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+2️⃣ CRÉATION D'UN PROJET JAVAFX AVEC MAVEN (3 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Pour créer un projet JavaFX professionnel, nous utilisons Maven comme gestionnaire 
+de dépendances.
+
+📄 [OUVRIR le fichier pom.xml]
+
+Dans notre fichier pom.xml, nous avons configuré :
+
+1. LES DÉPENDANCES JAVAFX :
+   - javafx-controls : pour les composants UI (boutons, tableaux, etc.)
+   - javafx-fxml : pour charger les interfaces définies en FXML
+   
+   [MONTRER les lignes 20-30 du pom.xml]
+   
+   Comme vous voyez ici, nous utilisons JavaFX version 17.0.2, qui est une version 
+   LTS (Long Term Support) stable.
+
+2. SQLITE-JDBC :
+   Pour la base de données embarquée. Pas besoin de serveur MySQL ou PostgreSQL, 
+   tout est dans un seul fichier.
+
+3. LE PLUGIN JAVAFX-MAVEN :
+   [MONTRER les lignes 60-67]
+   
+   Ce plugin nous permet de lancer l'application facilement avec la commande :
+   mvn javafx:run
+   
+   Il configure automatiquement les modules JavaFX nécessaires.
+
+4. CONFIGURATION JAVA :
+   Nous utilisons Java 17, qui supporte toutes les fonctionnalités modernes comme 
+   les text blocks que nous utilisons dans notre code.
+
+📁 STRUCTURE DU PROJET :
+
+Notre projet suit l'architecture MVC (Model-View-Controller) avec DAO :
+
+src/main/java/com/ecole/
+├── controller/     → Contrôleurs (gestion de la logique)
+├── dao/           → Data Access Objects (accès base de données)
+├── database/      → Gestionnaire de base de données
+├── model/         → Modèles de données (classes métier)
+└── MainApp.java   → Point d'entrée de l'application
+
+src/main/resources/
+├── fxml/          → Fichiers FXML (interfaces)
+└── css/           → Fichiers CSS (styles)
+
+Cette séparation permet un code propre, maintenable et facile à comprendre."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+3️⃣ FXML - FICHIERS D'INTERFACE (4 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Le FXML est un langage basé sur XML qui permet de définir les interfaces 
+graphiques de manière déclarative, séparée du code Java.
+
+📄 [OUVRIR Login.fxml]
+
+Voici notre écran de connexion. Analysons sa structure :
+
+1. DÉCLARATION FXML :
+   <?xml version="1.0" encoding="UTF-8"?>
+   <?import javafx.scene.layout.*?>
+   <?import javafx.scene.control.*?>
+   
+   On importe les packages JavaFX nécessaires.
+
+2. CONTENEUR PRINCIPAL - BORDERPANE :
+   [MONTRER la ligne <BorderPane>]
+   
+   BorderPane est parfait pour les écrans principaux. Il divise l'écran en 5 zones :
+   - Top : pour un header
+   - Center : pour le contenu principal
+   - Bottom, Left, Right : optionnels
+
+3. VBOX POUR L'EN-TÊTE :
+   <VBox styleClass="login-header">
+   
+   VBox arrange les éléments verticalement. Ici, on l'utilise pour le titre et 
+   sous-titre.
+
+4. GRIDPANE POUR LE FORMULAIRE :
+   [MONTRER le GridPane]
+   
+   GridPane organise les éléments en grille (lignes et colonnes).
+   
+   columnConstraints : définit la largeur des colonnes
+   rowConstraints : définit la hauteur des lignes
+   
+   Chaque élément a une position :
+   GridPane.columnIndex="0" → colonne 0 (label)
+   GridPane.columnIndex="1" → colonne 1 (champ de saisie)
+   GridPane.rowIndex="0" → première ligne
+
+5. LIAISON AVEC LE CONTRÔLEUR :
+   fx:controller="com.ecole.controller.LoginController"
+   
+   Cette ligne lie le FXML au contrôleur Java.
+   
+   fx:id="txtUsername" → identifiant pour accéder à cet élément dans le contrôleur
+   onAction="#handleLogin" → méthode appelée quand on clique sur le bouton
+
+6. STYLES CSS :
+   styleClass="primary-button"
+   
+   On applique des classes CSS définies dans notre fichier style.css.
+
+📄 [OUVRIR Dashboard.fxml rapidement]
+
+Dans le Dashboard, nous utilisons aussi un BorderPane :
+- Left : Menu de navigation avec VBox
+- Center : StackPane pour charger dynamiquement les différentes vues
+- Top : Header avec informations utilisateur
+
+Cette structure permet de garder le menu fixe et de changer seulement le contenu 
+central."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+4️⃣ LAYOUTS - DISPOSITIONS DES ÉLÉMENTS (3 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"JavaFX offre plusieurs layouts pour organiser les composants. Voyons les 
+principaux que nous utilisons :
+
+1. BORDERPANE :
+   [MONTRER dans Dashboard.fxml]
+   
+   Idéal pour : applications avec menu latéral, header, footer
+   Avantages : 
+   - Structure claire en 5 zones
+   - Responsive automatique
+   
+   Nous l'utilisons pour le Dashboard et l'écran de connexion.
+
+2. VBOX (Vertical Box) :
+   [MONTRER dans Dashboard.fxml - le menu]
+   
+   Arrange les éléments verticalement, l'un en dessous de l'autre.
+   
+   spacing="10" → espace de 10 pixels entre chaque élément
+   alignment="CENTER" → centre les éléments
+   
+   Parfait pour : menus, listes d'options, formulaires simples
+
+3. HBOX (Horizontal Box) :
+   [MONTRER dans Etudiants.fxml - la barre de boutons]
+   
+   Arrange les éléments horizontalement, côte à côte.
+   
+   Parfait pour : barres d'outils, boutons d'action, headers
+
+4. GRIDPANE :
+   [MONTRER dans le formulaire d'étudiant]
+   
+   Organisation en grille flexible.
+   
+   Exemple dans notre formulaire :
+   - Colonne 0 : Labels (Nom, Prénom, etc.)
+   - Colonne 1 : Champs de saisie
+   
+   hgap="10" → espace horizontal entre colonnes
+   vgap="10" → espace vertical entre lignes
+   
+   Parfait pour : formulaires, tableaux de données
+
+5. STACKPANE :
+   [MONTRER dans Dashboard.fxml - contentArea]
+   
+   Empile les éléments les uns sur les autres.
+   
+   Dans notre Dashboard, nous l'utilisons pour charger dynamiquement différentes 
+   vues au même endroit. C'est comme un conteneur qu'on peut vider et remplir 
+   avec différents écrans.
+
+IMBRICATION DES LAYOUTS :
+
+On peut combiner les layouts pour créer des interfaces complexes :
+
+BorderPane (structure principale)
+├── Left: VBox (menu vertical)
+│   └── Buttons (boutons de navigation)
+├── Top: HBox (header horizontal)
+│   └── Label + Button (titre + déconnexion)
+└── Center: StackPane (contenu dynamique)
+    └── GridPane (formulaire ou tableau)
+
+Cette flexibilité permet de créer n'importe quelle interface."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+5️⃣ GESTION DES ÉVÉNEMENTS (4 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"La gestion des événements permet de rendre l'interface interactive. Voyons 
+comment cela fonctionne.
+
+📄 [OUVRIR LoginController.java]
+
+1. LIAISON FXML-CONTROLLER :
+
+   Dans le FXML, nous avions :
+   fx:id="txtUsername"
+   
+   Dans le contrôleur, nous utilisons l'annotation @FXML :
+   
+   @FXML private TextField txtUsername;
+   
+   JavaFX fait automatiquement la liaison entre les deux. Pas besoin de 
+   findViewById() comme en Android !
+
+2. ÉVÉNEMENTS DE BOUTON :
+
+   Dans le FXML :
+   onAction="#handleLogin"
+   
+   Dans le contrôleur :
+   
+   @FXML
+   private void handleLogin() {
+       // Code exécuté quand on clique sur le bouton
+   }
+   
+   [MONTRER la méthode handleLogin() complète]
+   
+   Cette méthode :
+   - Récupère les valeurs des champs (getText())
+   - Valide les données
+   - Appelle la base de données
+   - Ouvre le Dashboard si succès
+   - Affiche une erreur sinon
+
+3. ÉVÉNEMENTS SUR TABLEVIEW :
+
+   [OUVRIR EtudiantsController.java]
+   
+   Pour les double-clics sur une ligne de tableau :
+   
+   tableEtudiants.setRowFactory(tv -> {
+       TableRow<Etudiant> row = new TableRow<>();
+       row.setOnMouseClicked(event -> {
+           if (event.getClickCount() == 2 && !row.isEmpty()) {
+               afficherFormulaireEtudiant(row.getItem());
+           }
+       });
+       return row;
+   });
+   
+   Cela permet de modifier un étudiant en double-cliquant dessus.
+
+4. ÉVÉNEMENTS DE RECHERCHE EN TEMPS RÉEL :
+
+   [MONTRER la méthode initialize()]
+   
+   searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+       filtrerEtudiants(newValue);
+   });
+   
+   À chaque caractère tapé dans le champ de recherche, la méthode filtrerEtudiants() 
+   est appelée automatiquement. C'est ce qu'on appelle un "listener" ou "écouteur".
+
+5. ÉVÉNEMENTS PERSONNALISÉS :
+
+   Pour les boutons Ajouter, Modifier, Supprimer :
+   
+   @FXML
+   private void ajouterEtudiant() {
+       afficherFormulaireEtudiant(null);
+   }
+   
+   @FXML
+   private void modifierEtudiant() {
+       Etudiant selected = tableEtudiants.getSelectionModel().getSelectedItem();
+       if (selected != null) {
+           afficherFormulaireEtudiant(selected);
+       }
+   }
+   
+   @FXML
+   private void supprimerEtudiant() {
+       Etudiant selected = tableEtudiants.getSelectionModel().getSelectedItem();
+       if (selected != null) {
+           // Confirmation puis suppression
+       }
+   }
+
+6. NAVIGATION ENTRE ÉCRANS :
+
+   [MONTRER dans DashboardController.java]
+   
+   @FXML
+   private void afficherEtudiants() {
+       chargerVue("/fxml/Etudiants.fxml");
+   }
+   
+   private void chargerVue(String fxmlPath) {
+       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+       Parent view = loader.load();
+       contentArea.getChildren().clear();
+       contentArea.getChildren().add(view);
+   }
+   
+   Cette méthode charge dynamiquement une nouvelle vue dans le StackPane central.
+
+RÉSUMÉ des types d'événements :
+- onAction : clic sur bouton
+- onMouseClicked : clic souris
+- textProperty().addListener : changement de texte
+- getSelectionModel() : sélection dans tableau
+- Platform.runLater() : exécution différée (pour l'UI)"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+6️⃣ ALERTES ET DIALOGUES (2 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"JavaFX offre plusieurs types d'alertes pour communiquer avec l'utilisateur.
+
+[MONTRER dans LoginController.java ou EtudiantsController.java]
+
+1. ALERTE D'ERREUR :
+
+   Alert alert = new Alert(Alert.AlertType.ERROR);
+   alert.setTitle("Erreur");
+   alert.setHeaderText("Connexion échouée");
+   alert.setContentText("Nom d'utilisateur ou mot de passe incorrect.");
+   alert.showAndWait();
+   
+   Types disponibles :
+   - ERROR : erreurs
+   - WARNING : avertissements
+   - INFORMATION : informations
+   - CONFIRMATION : confirmations
+
+2. DIALOGUE DE CONFIRMATION :
+
+   Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+   confirmation.setTitle("Confirmation");
+   confirmation.setHeaderText("Supprimer cet étudiant ?");
+   confirmation.setContentText("Cette action est irréversible.");
+   
+   Optional<ButtonType> result = confirmation.showAndWait();
+   if (result.isPresent() && result.get() == ButtonType.OK) {
+       // L'utilisateur a confirmé
+       etudiantDAO.supprimer(etudiant.getId());
+   }
+
+3. ALERTE DE SUCCÈS :
+
+   Alert success = new Alert(Alert.AlertType.INFORMATION);
+   success.setTitle("Succès");
+   success.setHeaderText(null);
+   success.setContentText("L'étudiant a été ajouté avec succès !");
+   success.showAndWait();
+
+4. DIALOGUE PERSONNALISÉ (FORMULAIRE MODAL) :
+
+   [MONTRER afficherFormulaireEtudiant() dans EtudiantsController]
+   
+   Stage dialog = new Stage();
+   dialog.initModality(Modality.APPLICATION_MODAL);
+   dialog.setTitle("Ajouter un étudiant");
+   
+   GridPane grid = new GridPane();
+   // ... ajout des champs
+   
+   Scene scene = new Scene(grid, 500, 600);
+   dialog.setScene(scene);
+   dialog.showAndWait();
+   
+   initModality(MODAL) bloque l'interaction avec la fenêtre principale jusqu'à 
+   ce que le dialogue soit fermé.
+
+Ces alertes rendent l'application intuitive et guident l'utilisateur."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+7️⃣ CSS - STYLING ET DESIGN (3 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Le CSS permet de séparer le style de la structure, exactement comme en 
+développement web.
+
+📄 [OUVRIR style.css]
+
+1. APPLICATION DU CSS :
+
+   Dans MainApp.java :
+   
+   scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+   
+   Le CSS est appliqué à toute l'application.
+
+2. STYLES GLOBAUX :
+
+   [MONTRER le début du fichier]
+   
+   .root {
+       -fx-font-family: "Segoe UI", Arial, sans-serif;
+       -fx-font-size: 14px;
+   }
+   
+   Ces propriétés s'appliquent à toute l'application.
+
+3. STYLES DE BOUTONS :
+
+   [MONTRER les classes .button]
+   
+   .primary-button {
+       -fx-background-color: #2196F3;
+       -fx-text-fill: white;
+       -fx-padding: 10px 20px;
+       -fx-cursor: hand;
+   }
+   
+   .primary-button:hover {
+       -fx-background-color: #1976D2;
+   }
+   
+   Le :hover change la couleur au survol de la souris.
+   
+   Dans le FXML :
+   <Button styleClass="primary-button" text="Connexion" />
+
+4. STYLES DE TABLEAUX :
+
+   [MONTRER .table-view]
+   
+   .table-view {
+       -fx-background-color: white;
+   }
+   
+   .table-view .column-header {
+       -fx-background-color: #f5f5f5;
+       -fx-font-weight: bold;
+   }
+   
+   .table-row-cell:hover {
+       -fx-background-color: #e3f2fd;
+   }
+   
+   Cela donne un effet au survol des lignes du tableau.
+
+5. SIDEBAR (MENU LATÉRAL) :
+
+   [MONTRER .sidebar]
+   
+   .sidebar {
+       -fx-background-color: linear-gradient(to bottom, #1e3c72, #2a5298);
+   }
+   
+   linear-gradient crée un dégradé de couleur du haut vers le bas.
+
+6. CARTES DE STATISTIQUES :
+
+   [MONTRER .stat-card]
+   
+   .stat-card {
+       -fx-background-color: white;
+       -fx-background-radius: 10px;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);
+   }
+   
+   dropshadow ajoute une ombre portée pour un effet moderne.
+
+7. RESPONSIVE DESIGN :
+
+   On peut aussi utiliser des media queries (pas montré ici) pour adapter 
+   l'interface selon la taille de l'écran.
+
+8. CLASSES MULTIPLES :
+
+   Dans FXML, on peut combiner plusieurs classes :
+   
+   <Button styleClass="button, success-button" />
+   
+   Le bouton aura les styles de .button ET .success-button.
+
+Le CSS rend l'application professionnelle et cohérente visuellement."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+8️⃣ ARCHITECTURE MVC + DAO (2 minutes - BONUS)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Notre application suit l'architecture MVC (Model-View-Controller) avec DAO 
+(Data Access Object). C'est un pattern professionnel utilisé en entreprise.
+
+1. MODEL (Modèle) :
+   [MONTRER Etudiant.java]
+   
+   Les classes du package 'model' représentent les données métier.
+   
+   class Etudiant {
+       private int id;
+       private String nom;
+       private String prenom;
+       // ... getters et setters
+   }
+   
+   Ce sont des POJOs (Plain Old Java Objects).
+
+2. VIEW (Vue) :
+   
+   Les fichiers FXML + CSS dans resources/
+   
+   Ils définissent UNIQUEMENT l'interface, pas la logique.
+
+3. CONTROLLER (Contrôleur) :
+   [MONTRER EtudiantsController.java]
+   
+   Les classes du package 'controller' font le lien entre Model et View.
+   
+   Elles :
+   - Reçoivent les événements de l'interface
+   - Appellent les DAO pour les données
+   - Mettent à jour l'affichage
+
+4. DAO (Data Access Object) :
+   [MONTRER EtudiantDAO.java]
+   
+   Les classes du package 'dao' gèrent l'accès à la base de données.
+   
+   class EtudiantDAO {
+       public void creer(Etudiant etudiant) { ... }
+       public List<Etudiant> obtenirTous() { ... }
+       public Etudiant obtenirParId(int id) { ... }
+       public void mettreAJour(Etudiant etudiant) { ... }
+       public void supprimer(int id) { ... }
+   }
+   
+   CRUD complet : Create, Read, Update, Delete
+
+AVANTAGES de cette architecture :
+- Code organisé et maintenable
+- Réutilisabilité (un DAO peut être utilisé par plusieurs contrôleurs)
+- Testabilité (on peut tester chaque couche indépendamment)
+- Séparation des responsabilités"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+9️⃣ DÉMONSTRATION EN DIRECT (5 minutes)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Maintenant, passons à la démonstration de l'application en fonctionnement.
+
+[LANCER l'application : mvn javafx:run]
+
+1. ÉCRAN DE CONNEXION :
+   
+   "Voici l'écran de connexion que nous avons créé avec FXML.
+   
+   [MONTRER les champs]
+   
+   On a trois rôles :
+   - ADMIN : accès complet
+   - PROF : accès limité
+   - ETUDIANT : consultation uniquement
+   
+   [SE CONNECTER avec admin/admin]
+   
+   Notez l'animation de chargement et la validation des champs."
+
+2. DASHBOARD :
+   
+   "Une fois connecté, on arrive sur le tableau de bord.
+   
+   [MONTRER le menu latéral]
+   
+   Le menu est créé avec VBox, et les permissions sont contrôlées selon le rôle.
+   
+   [MONTRER les statistiques]
+   
+   Ces statistiques sont calculées en temps réel depuis la base de données."
+
+3. GESTION DES ÉTUDIANTS :
+   
+   [CLIQUER sur "Étudiants"]
+   
+   "Voici la liste des étudiants dans un TableView.
+   
+   [MONTRER la recherche]
+   
+   La recherche fonctionne en temps réel grâce au listener que nous avons vu.
+   
+   [TAPER quelques lettres dans la recherche]
+   
+   Le tableau se filtre instantanément.
+   
+   [CLIQUER sur "Ajouter"]
+   
+   Le formulaire s'ouvre dans un dialogue modal avec GridPane.
+   
+   [REMPLIR quelques champs]
+   
+   Notez les validations : DatePicker pour la date, ComboBox pour la classe.
+   
+   [SAUVEGARDER]
+   
+   Une alerte de succès confirme l'ajout, et le tableau se met à jour automatiquement.
+   
+   [DOUBLE-CLIQUER sur un étudiant]
+   
+   On peut aussi modifier en double-cliquant, grâce à l'événement MouseClicked.
+   
+   [SÉLECTIONNER un étudiant et cliquer SUPPRIMER]
+   
+   Une confirmation s'affiche avant la suppression."
+
+4. GESTION DES NOTES :
+   
+   [ALLER dans Notes]
+   
+   "Pour les notes, on utilise deux ComboBox liées : étudiant et matière.
+   
+   [AJOUTER une note]
+   
+   Le système calcule automatiquement la moyenne de l'étudiant."
+
+5. EMPLOI DU TEMPS :
+   
+   [MONTRER rapidement l'emploi du temps]
+   
+   "L'emploi du temps utilise plusieurs ComboBox pour sélectionner classe, 
+   matière, enseignant, salle, et jour."
+
+6. RAPPORTS :
+   
+   [ALLER dans Rapports]
+   
+   "Le système peut générer différents rapports.
+   
+   [GÉNÉRER un relevé de notes]
+   
+   Un FileChooser permet de choisir où enregistrer le fichier.
+   
+   [OUVRIR le fichier généré]
+   
+   Le rapport est bien formaté et prêt à imprimer."
+
+7. DÉCONNEXION :
+   
+   [CLIQUER sur Déconnexion]
+   
+   "Une confirmation s'affiche, puis on retourne à l'écran de connexion.
+   
+   Toutes les transitions sont fluides grâce à l'architecture que nous avons mise 
+   en place."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+🔟 CONCLUSION (1 minute)
+═══════════════════════════════════════════════════════════════════════════════
+
+"En résumé, nous avons couvert tous les aspects de JavaFX :
+
+✅ Création d'un projet Maven avec dépendances JavaFX
+✅ Utilisation de FXML pour définir les interfaces
+✅ Différents layouts : BorderPane, VBox, HBox, GridPane, StackPane
+✅ Gestion des événements : boutons, tableaux, recherche
+✅ Alertes et dialogues : erreur, confirmation, information, modaux
+✅ Styling avec CSS : boutons, tableaux, thème cohérent
+✅ Architecture MVC + DAO professionnelle
+✅ Intégration d'une base de données SQLite
+✅ Application complète et fonctionnelle
+
+Cette application contient plus de 60 fichiers, 8 modules CRUD complets, et 
+démontre les bonnes pratiques de développement JavaFX.
+
+Le code source est 100% commenté en français pour faciliter la compréhension.
+
+Merci pour votre attention. Avez-vous des questions ?"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+📝 NOTES IMPORTANTES POUR LA PRÉSENTATION
+═══════════════════════════════════════════════════════════════════════════════
+
+AVANT LA PRÉSENTATION :
+
+1. ✅ Tester l'application plusieurs fois
+2. ✅ Préparer des données de démonstration dans la base
+3. ✅ Avoir VS Code ouvert avec les fichiers clés
+4. ✅ Tester que mvn javafx:run fonctionne
+5. ✅ Préparer un backup de la base de données
+6. ✅ Se répartir les parties entre les membres du groupe
+7. ✅ Chronométrer chaque section
+8. ✅ Répéter au moins 2-3 fois ensemble
+
+PENDANT LA PRÉSENTATION :
+
+✅ Parler clairement et lentement
+✅ Montrer le code ET l'application
+✅ Ne pas lire le script mot à mot (adapter à votre style)
+✅ Regarder l'audience, pas l'écran
+✅ Si problème technique : rester calme, avoir un backup
+✅ Encourager les questions
+✅ Sourire et montrer votre enthousiasme !
+
+RÉPARTITION SUGGÉRÉE (si vous êtes 3 personnes) :
+
+PERSONNE 1 :
+- Introduction
+- Création du projet Maven
+- Structure du projet
+
+PERSONNE 2 :
+- FXML
+- Layouts
+- CSS
+
+PERSONNE 3 :
+- Événements
+- Alertes
+- Démonstration live
+
+TOUS ENSEMBLE :
+- Conclusion
+- Questions/Réponses
+
+FICHIERS CLÉS À AVOIR OUVERTS :
+
+1. pom.xml
+2. Login.fxml
+3. LoginController.java
+4. Dashboard.fxml
+5. DashboardController.java
+6. Etudiants.fxml
+7. EtudiantsController.java
+8. style.css
+9. Etudiant.java
+10. EtudiantDAO.java
+
+QUESTIONS POSSIBLES ET RÉPONSES :
+
+Q: "Pourquoi utiliser FXML au lieu de créer l'UI en Java ?"
+R: "FXML sépare la structure de la logique, rend le code plus maintenable, 
+    et permet aux designers de travailler sur l'UI sans toucher au code Java."
+
+Q: "Comment gérez-vous la sécurité des mots de passe ?"
+R: "Actuellement en développement, les mots de passe sont en clair. En 
+    production, on utiliserait BCrypt ou SHA-256 pour le hachage."
+
+Q: "Pourquoi SQLite et pas MySQL ?"
+R: "SQLite est parfait pour une application desktop : pas besoin de serveur, 
+    tout dans un fichier, facile à déployer. Pour une vraie école avec plusieurs 
+    utilisateurs simultanés, on migrerait vers MySQL/PostgreSQL."
+
+Q: "Comment ajouter de nouveaux modules ?"
+R: "Grâce à l'architecture MVC+DAO, il suffit de créer : un Model, un DAO, 
+    un Controller, et un FXML. Le système est extensible."
+
+Q: "Combien de temps pour développer ça ?"
+R: "Environ [X heures/jours - adapter selon votre cas], en suivant les bonnes 
+    pratiques et en structurant bien dès le début."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 CONSEILS POUR UNE EXCELLENTE NOTE
+═══════════════════════════════════════════════════════════════════════════════
+
+CONTENU (50% de la note) :
+✅ Couvrir TOUS les points demandés
+✅ Montrer des exemples de code réels
+✅ Expliquer le "pourquoi", pas seulement le "comment"
+✅ Avoir une application fonctionnelle
+✅ Code bien commenté et structuré
+
+PRÉSENTATION (50% de la note) :
+✅ Posture droite et professionnelle
+✅ Voix claire, volume adapté
+✅ Contact visuel avec l'audience
+✅ Gestion du temps (ni trop court, ni trop long)
+✅ Transitions fluides entre les parties
+✅ Réponses claires aux questions
+✅ Enthousiasme et passion pour le sujet
+
+ANIMATIONS/SUPPORT VISUEL :
+✅ Alterner entre code et application
+✅ Utiliser des pointeurs/highlights pour guider le regard
+✅ Ne pas avoir trop de texte à l'écran
+✅ Avoir des diagrammes si possible (architecture)
+✅ Démonstration fluide sans bugs
+
+BON COURAGE ! VOUS ALLEZ ASSURER ! 💪🚀
+
+
+═══════════════════════════════════════════════════════════════════════════════
+FIN DU SCRIPT
+═══════════════════════════════════════════════════════════════════════════════

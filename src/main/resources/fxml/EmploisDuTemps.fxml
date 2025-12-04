@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.ecole.controller.EmploisDuTempsController" spacing="20">
+    <HBox spacing="15">
+        <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
+        <Button text="✏️ Modifier" onAction="#handleModifier"/>
+        <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Actualiser" onAction="#handleActualiser"/>
+    </HBox>
+    <TableView fx:id="tableEmplois" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="40"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+            <TableColumn text="Classe" prefWidth="80"><cellValueFactory><PropertyValueFactory property="classeId"/></cellValueFactory></TableColumn>
+            <TableColumn text="Matière" prefWidth="80"><cellValueFactory><PropertyValueFactory property="matiereId"/></cellValueFactory></TableColumn>
+            <TableColumn text="Enseignant" prefWidth="100"><cellValueFactory><PropertyValueFactory property="enseignantId"/></cellValueFactory></TableColumn>
+            <TableColumn text="Salle" prefWidth="80"><cellValueFactory><PropertyValueFactory property="salleId"/></cellValueFactory></TableColumn>
+            <TableColumn text="Jour" prefWidth="100"><cellValueFactory><PropertyValueFactory property="jour"/></cellValueFactory></TableColumn>
+            <TableColumn text="Début" prefWidth="80"><cellValueFactory><PropertyValueFactory property="heureDebut"/></cellValueFactory></TableColumn>
+            <TableColumn text="Fin" prefWidth="80"><cellValueFactory><PropertyValueFactory property="heureFin"/></cellValueFactory></TableColumn>
+        </columns>
+    </TableView>
+    <Label fx:id="lblTotal"/>
+</VBox>

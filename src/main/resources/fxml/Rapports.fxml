@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.ecole.controller.RapportsController" spacing="20">
+    
+    <Label text="📊 Génération de Rapports" styleClass="label-subtitle"/>
+    
+    <!-- Rapports sur les étudiants -->
+    <VBox styleClass="panel" spacing="15">
+        <Label text="Rapports Étudiants" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+        <Separator/>
+        <HBox spacing="15">
+            <VBox spacing="10">
+                <Label text="Liste complète des étudiants"/>
+                <Button text="Générer le rapport" onAction="#genererRapportEtudiants" prefWidth="200"/>
+            </VBox>
+            <VBox spacing="10">
+                <Label text="Étudiants par classe"/>
+                <ComboBox fx:id="classeComboEtudiants" promptText="Sélectionner une classe" prefWidth="200"/>
+                <Button text="Générer le rapport" onAction="#genererRapportEtudiantsParClasse" prefWidth="200"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    
+    <!-- Rapports sur les notes -->
+    <VBox styleClass="panel" spacing="15">
+        <Label text="Rapports Notes" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+        <Separator/>
+        <HBox spacing="15">
+            <VBox spacing="10">
+                <Label text="Relevé de notes d'un étudiant"/>
+                <ComboBox fx:id="etudiantComboNotes" promptText="Sélectionner un étudiant" prefWidth="250"/>
+                <Button text="Générer le relevé" onAction="#genererReleveNotes" prefWidth="250"/>
+            </VBox>
+            <VBox spacing="10">
+                <Label text="Notes par matière"/>
+                <ComboBox fx:id="matiereComboNotes" promptText="Sélectionner une matière" prefWidth="250"/>
+                <Button text="Générer le rapport" onAction="#genererRapportNotesMatiere" prefWidth="250"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    
+    <!-- Rapports sur les enseignants -->
+    <VBox styleClass="panel" spacing="15">
+        <Label text="Rapports Enseignants" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+        <Separator/>
+        <HBox spacing="15">
+            <VBox spacing="10">
+                <Label text="Liste des enseignants"/>
+                <Button text="Générer le rapport" onAction="#genererRapportEnseignants" prefWidth="200"/>
+            </VBox>
+            <VBox spacing="10">
+                <Label text="Emploi du temps d'un enseignant"/>
+                <ComboBox fx:id="enseignantComboEmploi" promptText="Sélectionner un enseignant" prefWidth="250"/>
+                <Button text="Générer le rapport" onAction="#genererEmploiEnseignant" prefWidth="250"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    
+    <!-- Rapports généraux -->
+    <VBox styleClass="panel" spacing="15">
+        <Label text="Rapports Généraux" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+        <Separator/>
+        <HBox spacing="15">
+            <VBox spacing="10">
+                <Label text="Statistiques générales de l'école"/>
+                <Button text="Générer le rapport" onAction="#genererRapportStatistiques" prefWidth="250"/>
+            </VBox>
+            <VBox spacing="10">
+                <Label text="Emploi du temps d'une classe"/>
+                <ComboBox fx:id="classeComboEmploi" promptText="Sélectionner une classe" prefWidth="250"/>
+                <Button text="Générer le rapport" onAction="#genererEmploiClasse" prefWidth="250"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    
+    <!-- Zone de statut -->
+    <VBox styleClass="panel" spacing="10">
+        <Label text="Statut" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblStatut" text="Prêt à générer des rapports..." style="-fx-text-fill: #666;"/>
+    </VBox>
+</VBox>

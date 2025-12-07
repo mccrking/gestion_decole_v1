@@ -6,6 +6,7 @@ package com.ecole.model;
 public class Utilisateur {
     private int id;
     private String nomUtilisateur;
+    private String email;
     private String motDePasse;
     private String role; // ADMIN, PROF, ETUDIANT
     private int referenceId; // ID de l'enseignant ou étudiant lié
@@ -15,10 +16,11 @@ public class Utilisateur {
     }
 
     // Constructeur complet
-    public Utilisateur(int id, String nomUtilisateur, String motDePasse, 
+    public Utilisateur(int id, String nomUtilisateur, String email, String motDePasse, 
                        String role, int referenceId) {
         this.id = id;
         this.nomUtilisateur = nomUtilisateur;
+        this.email = email;
         this.motDePasse = motDePasse;
         this.role = role;
         this.referenceId = referenceId;
@@ -39,6 +41,14 @@ public class Utilisateur {
 
     public void setNomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMotDePasse() {

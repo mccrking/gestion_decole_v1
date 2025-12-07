@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ecole.controller.EmploiProfController"
+      spacing="20" style="-fx-background-color: #f8f9fa;">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <!-- En-tête -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label fx:id="lblTitre" text="Mon Emploi du Temps" style="-fx-text-fill: #667eea; -fx-font-weight: bold;">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <Button text="🔄 Actualiser" onAction="#handleActualiser"
+                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-background-radius: 8px; -fx-cursor: hand;"/>
+    </HBox>
+    
+    <!-- Informations -->
+    <VBox spacing="10" style="-fx-background-color: #e3f2fd; -fx-background-radius: 10px; -fx-padding: 15px;">
+        <Label text="📅 Voici votre planning de cours pour la semaine" style="-fx-text-fill: #1976d2; -fx-font-weight: bold;">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Label>
+        <Label text="Les cours affichés ci-dessous sont ceux qui vous ont été assignés par l'administrateur." 
+               style="-fx-text-fill: #555;" wrapText="true"/>
+    </VBox>
+    
+    <!-- Tableau des emplois du temps -->
+    <TableView fx:id="tableEmploi" VBox.vgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 3);">
+        <columns>
+            <TableColumn fx:id="colJour" text="Jour" prefWidth="120">
+                <graphic>
+                    <Label text="📆 Jour" style="-fx-text-fill: white;"/>
+                </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colHeureDebut" text="Heure Début" prefWidth="120">
+                <graphic>
+                    <Label text="🕐 Début" style="-fx-text-fill: white;"/>
+                </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colHeureFin" text="Heure Fin" prefWidth="120">
+                <graphic>
+                    <Label text="🕐 Fin" style="-fx-text-fill: white;"/>
+                </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colClasseId" text="Classe" prefWidth="150">
+                <graphic>
+                    <Label text="🎓 Classe" style="-fx-text-fill: white;"/>
+                </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colMatiereId" text="Matière" prefWidth="180">
+                <graphic>
+                    <Label text="📚 Matière" style="-fx-text-fill: white;"/>
+                </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colSalleId" text="Salle" prefWidth="120">
+                <graphic>
+                    <Label text="🏫 Salle" style="-fx-text-fill: white;"/>
+                </graphic>
+            </TableColumn>
+        </columns>
+        <placeholder>
+            <VBox alignment="CENTER" spacing="10">
+                <Label text="📅" style="-fx-font-size: 48px;"/>
+                <Label text="Aucun cours programmé" style="-fx-font-size: 16px; -fx-text-fill: #999;"/>
+                <Label text="Contactez l'administrateur pour assigner des cours" 
+                       style="-fx-font-size: 12px; -fx-text-fill: #999;" wrapText="true"/>
+            </VBox>
+        </placeholder>
+    </TableView>
+    
+</VBox>

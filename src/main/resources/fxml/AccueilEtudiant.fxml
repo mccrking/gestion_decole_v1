@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ecole.controller.AccueilEtudiantController" 
+      spacing="30" styleClass="content-area">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- En-tête -->
+    <Label fx:id="lblBienvenue" text="Bienvenue, Étudiant !" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="32"/>
+        </font>
+    </Label>
+    
+    <!-- Informations personnelles -->
+    <HBox spacing="20">
+        <VBox styleClass="stat-card" spacing="10" prefWidth="350" prefHeight="150">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="🎓 Informations" styleClass="stat-label">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+            <Label fx:id="lblClasse" text="Classe: Non assigné">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" prefWidth="350" prefHeight="150">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="📊 Performance" styleClass="stat-label">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+            <Label fx:id="lblMoyenne" text="Moyenne générale: --/20">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+    
+    <!-- Informations -->
+    <VBox spacing="15" styleClass="panel">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <Label text="📚 Votre espace étudiant" styleClass="section-title">
+            <font>
+                <Font name="System Bold" size="18"/>
+            </font>
+        </Label>
+        
+        <Label text="• Consultez vos notes et votre moyenne" wrapText="true"/>
+        <Label text="• Visualisez votre emploi du temps" wrapText="true"/>
+        <Label text="• Accédez à vos informations personnelles" wrapText="true"/>
+    </VBox>
+    
+</VBox>

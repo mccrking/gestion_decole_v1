@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ecole.controller.AccueilProfController" 
+      spacing="30" style="-fx-background-color: #f8f9fa;">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- En-tête avec animation -->
+    <VBox spacing="10">
+        <Label fx:id="lblBienvenue" text="Bienvenue, Enseignant !" 
+               style="-fx-text-fill: #667eea; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);">
+            <font>
+                <Font name="System Bold" size="36"/>
+            </font>
+        </Label>
+        <Label text="Tableau de bord enseignant" style="-fx-text-fill: #718096;">
+            <font>
+                <Font size="16"/>
+            </font>
+        </Label>
+    </VBox>
+    
+    <!-- Cartes de statistiques avec gradient -->
+    <HBox spacing="25">
+        <VBox spacing="15" prefWidth="280" prefHeight="170"
+              style="-fx-background-color: #667eea; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 15, 0, 0, 5); -fx-cursor: hand;">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="👥" style="-fx-text-fill: white;">
+                    <font>
+                        <Font size="36"/>
+                    </font>
+                </Label>
+                <VBox spacing="5">
+                    <Label text="Total Étudiants" style="-fx-text-fill: rgba(255, 255, 255, 0.9);">
+                        <font>
+                            <Font name="System Bold" size="14"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="lblTotalEtudiants" text="0" 
+                           style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);">
+                        <font>
+                            <Font name="System Bold" size="52"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+        </VBox>
+        
+        <VBox spacing="15" prefWidth="280" prefHeight="170"
+              style="-fx-background-color: #f5576c; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.4), 15, 0, 0, 5); -fx-cursor: hand;">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="📝" style="-fx-text-fill: white;">
+                    <font>
+                        <Font size="36"/>
+                    </font>
+                </Label>
+                <VBox spacing="5">
+                    <Label text="Total Notes" style="-fx-text-fill: rgba(255, 255, 255, 0.9);">
+                        <font>
+                            <Font name="System Bold" size="14"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="lblTotalNotes" text="0" 
+                           style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);">
+                        <font>
+                            <Font name="System Bold" size="52"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+        </VBox>
+    </HBox>
+    
+    <!-- Grille d'accès rapide avec icônes -->
+    <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 5);">
+        <padding>
+            <Insets top="25" right="25" bottom="25" left="25"/>
+        </padding>
+        
+        <Label text="⚡ Accès rapide" style="-fx-text-fill: #2d3748;">
+            <font>
+                <Font name="System Bold" size="22"/>
+            </font>
+        </Label>
+        
+        <GridPane hgap="20" vgap="15">
+            <VBox spacing="8" prefWidth="250" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                  onMouseClicked="#handleGoToNotes"
+                  style="-fx-background-color: #f7fafc; -fx-background-radius: 10px; -fx-border-color: #e2e8f0; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-cursor: hand;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="📊 Gérer les notes" style="-fx-text-fill: #2d3748;">
+                    <font>
+                        <Font name="System Bold" size="15"/>
+                    </font>
+                </Label>
+                <Label text="Saisir et modifier les notes de vos étudiants" wrapText="true" style="-fx-text-fill: #718096;"/>
+            </VBox>
+            
+            <VBox spacing="8" prefWidth="250" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                  onMouseClicked="#handleGoToEtudiants"
+                  style="-fx-background-color: #f7fafc; -fx-background-radius: 10px; -fx-border-color: #e2e8f0; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-cursor: hand;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="👨‍🎓 Liste étudiants" style="-fx-text-fill: #2d3748;">
+                    <font>
+                        <Font name="System Bold" size="15"/>
+                    </font>
+                </Label>
+                <Label text="Consulter vos classes et étudiants" wrapText="true" style="-fx-text-fill: #718096;"/>
+            </VBox>
+            
+            <VBox spacing="8" prefWidth="250" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                  onMouseClicked="#handleGoToEmploi"
+                  style="-fx-background-color: #f7fafc; -fx-background-radius: 10px; -fx-border-color: #e2e8f0; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-cursor: hand;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="📅 Emploi du temps" style="-fx-text-fill: #2d3748;">
+                    <font>
+                        <Font name="System Bold" size="15"/>
+                    </font>
+                </Label>
+                <Label text="Votre planning de cours de la semaine" wrapText="true" style="-fx-text-fill: #718096;"/>
+            </VBox>
+            
+            <VBox spacing="8" prefWidth="250" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                  onMouseClicked="#handleGoToRapports"
+                  style="-fx-background-color: #f7fafc; -fx-background-radius: 10px; -fx-border-color: #e2e8f0; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-cursor: hand;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="📈 Rapports" style="-fx-text-fill: #2d3748;">
+                    <font>
+                        <Font name="System Bold" size="15"/>
+                    </font>
+                </Label>
+                <Label text="Générer des statistiques et rapports" wrapText="true" style="-fx-text-fill: #718096;"/>
+            </VBox>
+        </GridPane>
+    </VBox>
+    
+</VBox>

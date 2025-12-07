@@ -120,6 +120,7 @@ public class DatabaseManager {
                 CREATE TABLE IF NOT EXISTS utilisateurs (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     nom_utilisateur TEXT UNIQUE NOT NULL,
+                    email TEXT,
                     mot_de_passe TEXT NOT NULL,
                     role TEXT NOT NULL,
                     reference_id INTEGER
@@ -141,10 +142,10 @@ public class DatabaseManager {
             String checkAdmin = "SELECT COUNT(*) FROM utilisateurs WHERE role = 'ADMIN'";
             ResultSet rs = stmt.executeQuery(checkAdmin);
             if (rs.next() && rs.getInt(1) == 0) {
-                String insertAdmin = "INSERT INTO utilisateurs (nom_utilisateur, mot_de_passe, role, reference_id) " +
-                                   "VALUES ('admin', 'admin', 'ADMIN', 0)";
+                String insertAdmin = "INSERT INTO utilisateurs (nom_utilisateur, email, mot_de_passe, role, reference_id) " +
+                                   "VALUES ('admin', 'admin@ecole.com', 'admin', 'ADMIN', 0)";
                 stmt.execute(insertAdmin);
-                System.out.println("Compte admin créé : admin / admin");
+                System.out.println("Compte admin créé : admin@ecole.com / admin");
             }
             
             System.out.println("Base de données initialisée avec succès !");

@@ -15,6 +15,7 @@
         <columns>
             <TableColumn text="ID" prefWidth="50"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
             <TableColumn text="Nom d'utilisateur" prefWidth="200"><cellValueFactory><PropertyValueFactory property="nomUtilisateur"/></cellValueFactory></TableColumn>
+            <TableColumn text="Email" prefWidth="250"><cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory></TableColumn>
             <TableColumn text="Rôle" prefWidth="150"><cellValueFactory><PropertyValueFactory property="role"/></cellValueFactory></TableColumn>
             <TableColumn text="ID Référence" prefWidth="150"><cellValueFactory><PropertyValueFactory property="referenceId"/></cellValueFactory></TableColumn>
         </columns>

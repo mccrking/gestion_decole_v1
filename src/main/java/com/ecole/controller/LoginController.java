@@ -36,21 +36,21 @@ public class LoginController {
      */
     @FXML
     private void handleLogin() {
-        String username = usernameField.getText().trim();
+        String emailOrUsername = usernameField.getText().trim();
         String password = passwordField.getText();
         String role = roleComboBox.getValue();
 
         // Validation
-        if (username.isEmpty() || password.isEmpty()) {
+        if (emailOrUsername.isEmpty() || password.isEmpty()) {
             showError("Veuillez remplir tous les champs");
             return;
         }
 
-        // Authentification
-        Utilisateur utilisateur = utilisateurDAO.authentifier(username, password);
+        // Authentification par email
+        Utilisateur utilisateur = utilisateurDAO.authentifierParEmail(emailOrUsername, password);
 
         if (utilisateur == null) {
-            showError("Nom d'utilisateur ou mot de passe incorrect");
+            showError("Email ou mot de passe incorrect");
             return;
         }
 
@@ -69,18 +69,44 @@ public class LoginController {
      */
     private void ouvrirDashboard(Utilisateur utilisateur) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
+            String fxmlFile;
+            String title;
+            
+            // Choisir le dashboard selon le rôle
+            switch (utilisateur.getRole()) {
+                case "PROF":
+                    fxmlFile = "/fxml/DashboardProf.fxml";
+                    title = "Espace Enseignant";
+                    break;
+                case "ETUDIANT":
+                    fxmlFile = "/fxml/DashboardEtudiant.fxml";
+                    title = "Espace Étudiant";
+                    break;
+                case "ADMIN":
+                default:
+                    fxmlFile = "/fxml/Dashboard.fxml";
+                    title = "Administration";
+                    break;
+            }
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
 
-            // Passer l'utilisateur au contrôleur du dashboard
-            DashboardController controller = loader.getController();
-            controller.setUtilisateur(utilisateur);
+            // Passer l'utilisateur au contrôleur approprié
+            Object controller = loader.getController();
+            if (controller instanceof DashboardController) {
+                ((DashboardController) controller).setUtilisateur(utilisateur);
+            } else if (controller instanceof DashboardProfController) {
+                ((DashboardProfController) controller).setUtilisateur(utilisateur);
+            } else if (controller instanceof DashboardEtudiantController) {
+                ((DashboardEtudiantController) controller).setUtilisateur(utilisateur);
+            }
 
             // Créer la nouvelle scène
             Scene scene = new Scene(root, 1200, 700);
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Gestion d'École - " + utilisateur.getRole());
+            stage.setTitle("Gestion d'École - " + title);
             stage.setMaximized(true);
 
         } catch (Exception e) {

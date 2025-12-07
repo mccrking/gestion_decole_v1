@@ -44,8 +44,8 @@
             </Label>
             
             <VBox spacing="10" prefWidth="300">
-                <Label text="Nom d'utilisateur"/>
-                <TextField fx:id="usernameField" promptText="Entrez votre nom d'utilisateur"/>
+                <Label text="Email"/>
+                <TextField fx:id="usernameField" promptText="Entrez votre email"/>
             </VBox>
             
             <VBox spacing="10" prefWidth="300">

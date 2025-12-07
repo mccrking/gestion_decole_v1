@@ -86,6 +86,7 @@ public class UtilisateursController extends BaseController {
         grid.setPadding(new Insets(20));
 
         TextField nomUtilisateurField = new TextField();
+        TextField emailField = new TextField();
         PasswordField motDePasseField = new PasswordField();
         ComboBox<String> roleCombo = new ComboBox<>();
         TextField referenceIdField = new TextField();
@@ -94,6 +95,7 @@ public class UtilisateursController extends BaseController {
 
         if (utilisateur != null) {
             nomUtilisateurField.setText(utilisateur.getNomUtilisateur());
+            emailField.setText(utilisateur.getEmail());
             motDePasseField.setText(utilisateur.getMotDePasse());
             roleCombo.setValue(utilisateur.getRole());
             referenceIdField.setText(String.valueOf(utilisateur.getReferenceId()));
@@ -101,12 +103,14 @@ public class UtilisateursController extends BaseController {
 
         grid.add(new Label("Nom d'utilisateur:"), 0, 0);
         grid.add(nomUtilisateurField, 1, 0);
-        grid.add(new Label("Mot de passe:"), 0, 1);
-        grid.add(motDePasseField, 1, 1);
-        grid.add(new Label("Rôle:"), 0, 2);
-        grid.add(roleCombo, 1, 2);
-        grid.add(new Label("ID Référence:"), 0, 3);
-        grid.add(referenceIdField, 1, 3);
+        grid.add(new Label("Email:"), 0, 1);
+        grid.add(emailField, 1, 1);
+        grid.add(new Label("Mot de passe:"), 0, 2);
+        grid.add(motDePasseField, 1, 2);
+        grid.add(new Label("Rôle:"), 0, 3);
+        grid.add(roleCombo, 1, 3);
+        grid.add(new Label("ID Référence:"), 0, 4);
+        grid.add(referenceIdField, 1, 4);
 
         Button btnSave = new Button("Sauvegarder");
         Button btnCancel = new Button("Annuler");
@@ -117,6 +121,7 @@ public class UtilisateursController extends BaseController {
             try {
                 Utilisateur u = utilisateur == null ? new Utilisateur() : utilisateur;
                 u.setNomUtilisateur(nomUtilisateurField.getText());
+                u.setEmail(emailField.getText());
                 u.setMotDePasse(motDePasseField.getText());
                 u.setRole(roleCombo.getValue());
                 u.setReferenceId(Integer.parseInt(referenceIdField.getText()));
@@ -127,8 +132,8 @@ public class UtilisateursController extends BaseController {
             }
         });
 
-        grid.add(new HBox(10, btnSave, btnCancel), 1, 4);
-        Scene scene = new Scene(grid, 400, 250);
+        grid.add(new HBox(10, btnSave, btnCancel), 1, 5);
+        Scene scene = new Scene(grid, 400, 300);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         dialog.setScene(scene);
         dialog.showAndWait();

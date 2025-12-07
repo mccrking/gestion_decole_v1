@@ -14,6 +14,7 @@
         <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
         <Button text="✏️ Modifier" onAction="#handleModifier"/>
         <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
+        <Button text="📋 Détails" onAction="#handleDetails" styleClass="button-info"/>
         <Region HBox.hgrow="ALWAYS"/>
         <TextField fx:id="searchField" promptText="🔍 Rechercher..." prefWidth="300"/>
         <Button text="🔄 Actualiser" onAction="#handleActualiser"/>

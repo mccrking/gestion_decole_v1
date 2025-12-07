@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ecole.controller.DashboardEtudiantController" styleClass="root">
+    
+    <!-- Header -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            
+            <Label text="🎓 Espace Étudiant" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <VBox alignment="CENTER_RIGHT">
+                <Label fx:id="userLabel" styleClass="user-info">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+            </VBox>
+            
+            <Button text="Déconnexion" onAction="#handleLogout" styleClass="button, danger-button"/>
+        </HBox>
+    </top>
+    
+    <!-- Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" spacing="5" prefWidth="250">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+            
+            <Label text="NAVIGATION" styleClass="sidebar-section">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+            </Label>
+            
+            <Button fx:id="btnAccueil" text="🏠 Accueil" onAction="#showAccueil" 
+                    styleClass="sidebar-button" maxWidth="Infinity"/>
+            
+            <Button fx:id="btnMesNotes" text="📊 Mes Notes" onAction="#showMesNotes" 
+                    styleClass="sidebar-button" maxWidth="Infinity"/>
+            
+            <Button fx:id="btnMonEmploi" text="📅 Mon Emploi du Temps" onAction="#showMonEmploi" 
+                    styleClass="sidebar-button" maxWidth="Infinity"/>
+            
+            <Button fx:id="btnMesInfos" text="👤 Mes Informations" onAction="#showMesInfos" 
+                    styleClass="sidebar-button" maxWidth="Infinity"/>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <Label text="Version 1.0" styleClass="sidebar-footer">
+                <font>
+                    <Font size="10"/>
+                </font>
+            </Label>
+        </VBox>
+    </left>
+    
+    <!-- Content Area -->
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </StackPane>
+    </center>
+    
+</BorderPane>

@@ -41,6 +41,15 @@
     -fx-background-color: #da190b;
 }
 
+/* Boutons info */
+.button-info {
+    -fx-background-color: #2196F3;
+}
+
+.button-info:hover {
+    -fx-background-color: #1976D2;
+}
+
 /* Boutons secondaires */
 .button-secondary {
     -fx-background-color: #757575;
@@ -223,3 +232,246 @@
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
+
+/* ======================== */
+/* STYLES PROFESSEUR AMÉLIORES */
+/* ======================== */
+
+/* Titre principal professeur */
+.page-title-prof {
+    -fx-text-fill: #667eea;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+/* Sous-titre */
+.subtitle-text {
+    -fx-text-fill: #718096;
+    -fx-font-size: 16px;
+}
+
+/* Cartes de statistiques professeur avec gradient */
+.stat-card-prof {
+    -fx-background-color: #667eea;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 15, 0, 0, 5);
+    -fx-cursor: hand;
+}
+
+.stat-card-prof:hover {
+    -fx-background-color: #5568d3;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.6), 20, 0, 0, 8);
+    -fx-scale-y: 1.02;
+}
+
+.stat-card-prof-alt {
+    -fx-background-color: #f5576c;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.4), 15, 0, 0, 5);
+    -fx-cursor: hand;
+}
+
+.stat-card-prof-alt:hover {
+    -fx-background-color: #f24055;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.6), 20, 0, 0, 8);
+    -fx-scale-y: 1.02;
+}
+
+/* Icônes dans les cartes */
+.stat-icon {
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+}
+
+/* Labels des stats professeur */
+.stat-label-prof {
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-size: 14px;
+}
+
+.stat-value-prof {
+    -fx-text-fill: white;
+    -fx-font-size: 52px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);
+}
+
+/* Panel professeur */
+.panel-prof {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 5);
+}
+
+/* Titre de section professeur */
+.section-title-prof {
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* Items d'accès rapide */
+.quick-access-item {
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 10px;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.quick-access-item:hover {
+    -fx-background-color: #edf2f7;
+    -fx-border-color: #cbd5e0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+    -fx-translate-y: -2px;
+}
+
+.quick-access-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.quick-access-desc {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+}
+
+/* Sidebar professeur */
+.sidebar {
+    -fx-background-color: #2c3e50;
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ecf0f1;
+    -fx-alignment: center-left;
+    -fx-padding: 15px 20px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+}
+
+.sidebar-button:focused {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.sidebar-section {
+    -fx-text-fill: #95a5a6;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-footer {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 10px;
+}
+
+/* Header professeur */
+.header {
+    -fx-background-color: #667eea;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);
+}
+
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.user-info {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.danger-button {
+    -fx-background-color: #e74c3c;
+    -fx-background-radius: 8px;
+}
+
+.danger-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* Content area */
+.content-area {
+    -fx-background-color: #f8f9fa;
+}
+
+/* Animation subtle pour les tableaux */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 3);
+}
+
+.table-view .column-header {
+    -fx-background-color: #667eea;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12px;
+    -fx-font-size: 13px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #1976d2;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #fafafa;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: white;
+}
+
+/* Boutons améliorés pour prof */
+.button {
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 3);
+    -fx-translate-y: -1px;
+}
+
+/* Text fields améliorés */
+.text-field {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused {
+    -fx-border-color: #667eea;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 5, 0, 0, 2);
+}
+
+/* Combo box améliorés */
+.combo-box {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #667eea;
+    -fx-border-width: 2px;
+}
+

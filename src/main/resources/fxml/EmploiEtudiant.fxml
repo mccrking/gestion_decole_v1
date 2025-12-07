@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ecole.controller.EmploiEtudiantController" 
+      spacing="20" styleClass="content-area">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <!-- En-tête -->
+    <Label text="📅 Mon Emploi du Temps" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28"/>
+        </font>
+    </Label>
+    
+    <!-- Tableau de l'emploi du temps -->
+    <TableView fx:id="tableEmploi" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colJour" text="Jour" prefWidth="120"/>
+            <TableColumn fx:id="colHeureDebut" text="Heure Début" prefWidth="100"/>
+            <TableColumn fx:id="colHeureFin" text="Heure Fin" prefWidth="100"/>
+            <TableColumn fx:id="colMatiere" text="Matière" prefWidth="150"/>
+            <TableColumn fx:id="colEnseignant" text="Enseignant" prefWidth="150"/>
+            <TableColumn fx:id="colSalle" text="Salle" prefWidth="100"/>
+        </columns>
+    </TableView>
+    
+</VBox>

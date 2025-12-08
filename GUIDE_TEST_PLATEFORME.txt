@@ -1,0 +1,770 @@
+
+ÉTAPE 1: LANCER L'APPLICATION
+------------------------------
+1. Ouvrir PowerShell dans le dossier du projet
+2. Exécuter la commande:
+   
+   mvn clean javafx:run
+
+3. L'application démarre et affiche l'écran de connexion
+ La base de données (ecole.db) est créée automatiquement
+
+
+ÉTAPE 1: PREMIÈRE CONNEXION (ADMIN)
+------------------------------------
+Email:        admin@ecole.com
+Mot de passe: admin
+
+➜ Cliquer sur "Connexion"
+➜ Vous arrivez sur le Dashboard Admin avec 8 modules
+
+
+VÉRIFICATIONS INITIALES:
+------------------------
+✓ Interface s'affiche correctement
+✓ Menu de navigation à gauche visible
+✓ Statistiques affichées (0 partout initialement)
+✓ Pas d'erreur dans la console
+
+
+================================================================================
+PARTIE 2: SCÉNARIOS DE TEST COMPLETS
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 1: GESTION DES UTILISATEURS                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Créer les comptes utilisateurs pour les profs et étudiants
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Utilisateurs" dans le menu
+2. Cliquer sur "➕ Ajouter"
+3. Remplir le formulaire:
+   - Nom d'utilisateur: naoufal.prof
+   - Email: naoufal@ecole.com
+   - Mot de passe: prof123
+   - Rôle: PROF
+   - ID Référence: 1 (sera lié à l'enseignant après création)
+4. Cliquer sur "Sauvegarder"
+5. Vérifier que l'utilisateur apparaît dans le tableau
+
+RÉSULTAT ATTENDU:
+-----------------
+✓ Message "Utilisateur ajouté!" affiché
+✓ L'utilisateur apparaît dans la liste avec son email
+✓ Total utilisateurs: 2 (admin + naoufal)
+
+TEST DE MODIFICATION:
+---------------------
+1. Sélectionner l'utilisateur "naoufal.prof"
+2. Cliquer sur "✏️ Modifier"
+3. Changer l'email en: naoufal.enseignant@ecole.com
+4. Cliquer sur "Sauvegarder"
+5. Vérifier que l'email a été modifié
+
+TEST DE SUPPRESSION:
+--------------------
+❌ NE PAS SUPPRIMER L'ADMIN!
+✓ Essayer de supprimer l'admin → Message d'erreur "Impossible de supprimer l'admin principal!"
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 2: GESTION DES ENSEIGNANTS                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Créer la liste des professeurs
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Enseignants"
+2. Cliquer sur "➕ Ajouter"
+3. Remplir les informations du professeur
+4. Répéter pour tous les enseignants (voir données ci-dessous)
+
+VÉRIFICATIONS:
+--------------
+✓ Chaque enseignant a un matricule unique
+✓ Email unique pour chaque enseignant
+✓ Téléphone au format correct
+✓ Spécialité correspond aux matières enseignées
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 3: GESTION DES CLASSES                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Créer les différentes classes de l'école
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Classes"
+2. Cliquer sur "➕ Ajouter"
+3. Créer toutes les classes (voir liste ci-dessous)
+
+VÉRIFICATIONS:
+--------------
+✓ Nom de classe unique
+✓ Niveau correct (Primaire, Collège, Lycée, Université)
+✓ Capacité maximale réaliste
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 4: GESTION DES MATIÈRES                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Définir toutes les matières enseignées
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Matières"
+2. Ajouter chaque matière avec son coefficient et enseignant responsable
+3. Vérifier que l'enseignant ID correspond bien
+
+TEST IMPORTANT:
+---------------
+✓ Vérifier la liaison avec les enseignants (ID correct)
+✓ Coefficients cohérents (entre 1 et 5 généralement)
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 5: GESTION DES ÉTUDIANTS                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Inscrire les étudiants dans les classes
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Étudiants"
+2. Ajouter chaque étudiant avec ses informations complètes
+3. Attribuer une classe_id correspondante
+
+VÉRIFICATIONS:
+--------------
+✓ Email unique (@etudiant.ecole.com)
+✓ Numéro d'étudiant unique (format: ETU001, ETU002...)
+✓ Date de naissance réaliste
+✓ Classe_id correspond à une classe existante
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 6: GESTION DES SALLES                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Configurer les salles de cours
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Salles"
+2. Ajouter toutes les salles disponibles
+3. Définir capacité et type (Cours, TP, Amphi)
+
+VÉRIFICATIONS:
+--------------
+✓ Numéro de salle unique
+✓ Capacité cohérente avec le type
+✓ Type correspond à l'usage
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 7: GESTION DES EMPLOIS DU TEMPS                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Planifier les cours de la semaine
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Emplois du Temps"
+2. Créer un cours avec:
+   - Classe_id
+   - Matière_id
+   - Enseignant_id
+   - Salle
+   - Jour (Lundi, Mardi...)
+   - Heure début (08:00, 10:00...)
+   - Heure fin (10:00, 12:00...)
+
+RÈGLES À RESPECTER:
+-------------------
+✓ Pas de chevauchement pour une même classe
+✓ Pas de chevauchement pour un même enseignant
+✓ Pas de chevauchement pour une même salle
+✓ Horaires réalistes (8h-18h)
+
+TEST IMPORTANT:
+---------------
+▶ Se connecter avec le compte PROF
+▶ Aller dans "Mon Emploi du Temps"
+▶ Vérifier que seuls SES cours apparaissent
+▶ Vérifier le tri par jour et heure
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 8: GESTION DES NOTES                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBJECTIF: Saisir les notes des étudiants
+
+ÉTAPES:
+-------
+1. Cliquer sur "Gestion des Notes"
+2. Ajouter une note:
+   - Étudiant_id
+   - Matière_id
+   - Note (0-20)
+   - Type (Contrôle Continu, Examen, TP)
+   - Date
+
+VÉRIFICATIONS:
+--------------
+✓ Note entre 0 et 20
+✓ Date cohérente
+✓ Type correct
+
+TEST EN TANT QUE PROF:
+----------------------
+▶ Se connecter avec le compte PROF
+▶ Aller dans "Mes Notes"
+▶ Vérifier que seules les notes de SES matières apparaissent
+
+TEST EN TANT QUE ÉTUDIANT:
+--------------------------
+▶ Se connecter avec le compte ÉTUDIANT
+▶ Aller dans "Mes Notes"
+▶ Vérifier que seules SES notes apparaissent
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 9: STATISTIQUES ET DASHBOARD                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+TEST DASHBOARD ADMIN:
+---------------------
+✓ Total enseignants correct
+✓ Total étudiants correct
+✓ Total classes correct
+✓ Graphiques et statistiques à jour
+
+TEST DASHBOARD PROF:
+--------------------
+✓ Nombre d'étudiants dans SES classes
+✓ Nombre de notes saisies pour SES matières
+✓ Cartes cliquables (Mes Étudiants, Mes Notes, Mon Emploi)
+✓ Statistiques personnalisées
+
+TEST DASHBOARD ÉTUDIANT:
+------------------------
+✓ Informations personnelles affichées
+✓ Moyenne générale calculée
+✓ Liste des notes visible
+✓ Emploi du temps de SA classe
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SCÉNARIO 10: NAVIGATION ET DÉCONNEXION                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+TEST DE NAVIGATION:
+-------------------
+✓ Cliquer sur chaque menu → Vérifier que la vue se charge
+✓ Utiliser les cartes cliquables sur l'accueil
+✓ Revenir à l'accueil avec le bouton "Accueil"
+
+TEST DE DÉCONNEXION:
+--------------------
+1. Cliquer sur "Déconnexion"
+2. Vérifier retour à l'écran de connexion
+3. Essayer de se reconnecter avec un autre compte
+
+
+================================================================================
+PARTIE 3: 10 JEUX DE DONNÉES COMPLETS POUR REMPLIR LA PLATEFORME
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 1: ENSEIGNANTS (8 professeurs)                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1. PROF DE MATHÉMATIQUES:
+   Nom:         BENNANI
+   Prénom:      Ahmed
+   Matricule:   ENS001
+   Email:       ahmed.bennani@ecole.com
+   Téléphone:   0612345678
+   Adresse:     12 Rue des Écoles, Casablanca
+   Spécialité:  Mathématiques
+
+2. PROF DE PHYSIQUE-CHIMIE:
+   Nom:         ALAMI
+   Prénom:      Fatima
+   Matricule:   ENS002
+   Email:       fatima.alami@ecole.com
+   Téléphone:   0612345679
+   Adresse:     25 Avenue Mohammed V, Rabat
+   Spécialité:  Physique-Chimie
+
+3. PROF DE FRANÇAIS:
+   Nom:         IDRISSI
+   Prénom:      Naoufal
+   Matricule:   ENS003
+   Email:       naoufal.idrissi@ecole.com
+   Téléphone:   0612345680
+   Adresse:     8 Boulevard Zerktouni, Casablanca
+   Spécialité:  Lettres Françaises
+
+4. PROF D'ANGLAIS:
+   Nom:         TAZI
+   Prénom:      Samira
+   Matricule:   ENS004
+   Email:       samira.tazi@ecole.com
+   Téléphone:   0612345681
+   Adresse:     33 Rue Hassan II, Fès
+   Spécialité:  Langues Anglaises
+
+5. PROF D'HISTOIRE-GÉO:
+   Nom:         CHAKRI
+   Prénom:      Hassan
+   Matricule:   ENS005
+   Email:       hassan.chakri@ecole.com
+   Téléphone:   0612345682
+   Adresse:     17 Rue de la Liberté, Marrakech
+   Spécialité:  Histoire-Géographie
+
+6. PROF DE SVT:
+   Nom:         BENJELLOUN
+   Prénom:      Meriem
+   Matricule:   ENS006
+   Email:       meriem.benjelloun@ecole.com
+   Téléphone:   0612345683
+   Adresse:     45 Avenue des FAR, Tanger
+   Spécialité:  Sciences de la Vie et de la Terre
+
+7. PROF D'INFORMATIQUE:
+   Nom:         LAHLOU
+   Prénom:      Youssef
+   Matricule:   ENS007
+   Email:       youssef.lahlou@ecole.com
+   Téléphone:   0612345684
+   Adresse:     22 Rue Ibn Batouta, Agadir
+   Spécialité:  Informatique et Programmation
+
+8. PROF DE SPORT:
+   Nom:         MANSOURI
+   Prénom:      Karim
+   Matricule:   ENS008
+   Email:       karim.mansouri@ecole.com
+   Téléphone:   0612345685
+   Adresse:     9 Avenue Al Massira, Oujda
+   Spécialité:  Éducation Physique et Sportive
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 2: CLASSES (10 classes)                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1.  Classe: 1ère Année Bac Sciences         | Niveau: Lycée      | Capacité: 35
+2.  Classe: 2ème Année Bac Sciences         | Niveau: Lycée      | Capacité: 30
+3.  Classe: 1ère Année Bac Lettres          | Niveau: Lycée      | Capacité: 32
+4.  Classe: 3ème Collège A                  | Niveau: Collège    | Capacité: 40
+5.  Classe: 3ème Collège B                  | Niveau: Collège    | Capacité: 38
+6.  Classe: 2ème Collège                    | Niveau: Collège    | Capacité: 40
+7.  Classe: 1ère Collège                    | Niveau: Collège    | Capacité: 42
+8.  Classe: Licence Informatique 1          | Niveau: Université | Capacité: 50
+9.  Classe: Licence Informatique 2          | Niveau: Université | Capacité: 45
+10. Classe: Master Data Science             | Niveau: Université | Capacité: 25
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 3: MATIÈRES (12 matières)                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1.  Matière: Mathématiques          | Coef: 5 | Enseignant_id: 1
+2.  Matière: Physique-Chimie        | Coef: 4 | Enseignant_id: 2
+3.  Matière: Français               | Coef: 3 | Enseignant_id: 3
+4.  Matière: Anglais                | Coef: 2 | Enseignant_id: 4
+5.  Matière: Histoire-Géographie    | Coef: 2 | Enseignant_id: 5
+6.  Matière: SVT                    | Coef: 3 | Enseignant_id: 6
+7.  Matière: Informatique           | Coef: 3 | Enseignant_id: 7
+8.  Matière: Éducation Physique     | Coef: 1 | Enseignant_id: 8
+9.  Matière: Philosophie            | Coef: 3 | Enseignant_id: 3
+10. Matière: Arabe                  | Coef: 2 | Enseignant_id: 3
+11. Matière: Programmation Java     | Coef: 4 | Enseignant_id: 7
+12. Matière: Base de Données        | Coef: 4 | Enseignant_id: 7
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 4: ÉTUDIANTS (20 étudiants)                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+📌 CLASSE: 1ère Année Bac Sciences (classe_id: 1)
+--------------------------------------------------
+1.  Numéro: ETU001 | Nom: BERRADA      | Prénom: Amine      | Email: amine.berrada@etudiant.ecole.com      | Tel: 0670001001 | Date naiss: 2007-03-15
+2.  Numéro: ETU002 | Nom: SQUALLI      | Prénom: Yasmine    | Email: yasmine.squalli@etudiant.ecole.com    | Tel: 0670001002 | Date naiss: 2007-05-22
+3.  Numéro: ETU003 | Nom: FASSI        | Prénom: Omar       | Email: omar.fassi@etudiant.ecole.com         | Tel: 0670001003 | Date naiss: 2007-08-10
+4.  Numéro: ETU004 | Nom: KETTANI      | Prénom: Salma      | Email: salma.kettani@etudiant.ecole.com      | Tel: 0670001004 | Date naiss: 2007-01-18
+
+📌 CLASSE: 2ème Année Bac Sciences (classe_id: 2)
+--------------------------------------------------
+5.  Numéro: ETU005 | Nom: CHRAIBI      | Prénom: Mehdi      | Email: mehdi.chraibi@etudiant.ecole.com      | Tel: 0670001005 | Date naiss: 2006-09-05
+6.  Numéro: ETU006 | Nom: FILALI       | Prénom: Amina      | Email: amina.filali@etudiant.ecole.com       | Tel: 0670001006 | Date naiss: 2006-11-12
+7.  Numéro: ETU007 | Nom: SEFRIOUI     | Prénom: Hamza      | Email: hamza.sefrioui@etudiant.ecole.com     | Tel: 0670001007 | Date naiss: 2006-04-28
+8.  Numéro: ETU008 | Nom: BENNANI      | Prénom: Imane      | Email: imane.bennani@etudiant.ecole.com      | Tel: 0670001008 | Date naiss: 2006-07-14
+
+📌 CLASSE: 3ème Collège A (classe_id: 4)
+-----------------------------------------
+9.  Numéro: ETU009 | Nom: LAHLOU       | Prénom: Adam       | Email: adam.lahlou@etudiant.ecole.com        | Tel: 0670001009 | Date naiss: 2009-02-20
+10. Numéro: ETU010 | Nom: TAZI         | Prénom: Sofia      | Email: sofia.tazi@etudiant.ecole.com         | Tel: 0670001010 | Date naiss: 2009-06-08
+11. Numéro: ETU011 | Nom: ALAOUI       | Prénom: Yassine    | Email: yassine.alaoui@etudiant.ecole.com     | Tel: 0670001011 | Date naiss: 2009-10-30
+12. Numéro: ETU012 | Nom: IDRISSI      | Prénom: Nour       | Email: nour.idrissi@etudiant.ecole.com       | Tel: 0670001012 | Date naiss: 2009-12-17
+
+📌 CLASSE: Licence Informatique 1 (classe_id: 8)
+-------------------------------------------------
+13. Numéro: ETU013 | Nom: BENALI       | Prénom: Karim      | Email: karim.benali@etudiant.ecole.com       | Tel: 0670001013 | Date naiss: 2004-03-25
+14. Numéro: ETU014 | Nom: MOUSSAOUI    | Prénom: Leila      | Email: leila.moussaoui@etudiant.ecole.com    | Tel: 0670001014 | Date naiss: 2004-08-14
+15. Numéro: ETU015 | Nom: CHAKIR       | Prénom: Rachid     | Email: rachid.chakir@etudiant.ecole.com      | Tel: 0670001015 | Date naiss: 2004-11-02
+16. Numéro: ETU016 | Nom: ALAMI        | Prénom: Zineb      | Email: zineb.alami@etudiant.ecole.com        | Tel: 0670001016 | Date naiss: 2004-05-19
+
+📌 CLASSE: Licence Informatique 2 (classe_id: 9)
+-------------------------------------------------
+17. Numéro: ETU017 | Nom: MANSOURI     | Prénom: Tarik      | Email: tarik.mansouri@etudiant.ecole.com     | Tel: 0670001017 | Date naiss: 2003-01-08
+18. Numéro: ETU018 | Nom: BENJELLOUN   | Prénom: Hiba       | Email: hiba.benjelloun@etudiant.ecole.com    | Tel: 0670001018 | Date naiss: 2003-04-22
+19. Numéro: ETU019 | Nom: FAHMI        | Prénom: Anas       | Email: anas.fahmi@etudiant.ecole.com         | Tel: 0670001019 | Date naiss: 2003-09-11
+20. Numéro: ETU020 | Nom: JAMALI       | Prénom: Meryem     | Email: meryem.jamali@etudiant.ecole.com      | Tel: 0670001020 | Date naiss: 2003-12-05
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 5: SALLES (15 salles)                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1.  Numéro: A101 | Capacité: 40 | Type: Cours
+2.  Numéro: A102 | Capacité: 40 | Type: Cours
+3.  Numéro: A103 | Capacité: 35 | Type: Cours
+4.  Numéro: B201 | Capacité: 30 | Type: TP
+5.  Numéro: B202 | Capacité: 30 | Type: TP
+6.  Numéro: B203 | Capacité: 25 | Type: TP
+7.  Numéro: C301 | Capacité: 100 | Type: Amphi
+8.  Numéro: C302 | Capacité: 80 | Type: Amphi
+9.  Numéro: D101 | Capacité: 35 | Type: Cours
+10. Numéro: D102 | Capacité: 40 | Type: Cours
+11. Numéro: Lab1 | Capacité: 25 | Type: Laboratoire
+12. Numéro: Lab2 | Capacité: 25 | Type: Laboratoire
+13. Numéro: Gym1 | Capacité: 50 | Type: Gymnase
+14. Numéro: Info1 | Capacité: 30 | Type: Salle Informatique
+15. Numéro: Info2 | Capacité: 30 | Type: Salle Informatique
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 6: EMPLOI DU TEMPS - 1ère Année Bac Sciences (classe_id: 1)         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Jour      | Heure      | Matière_id | Enseignant_id | Salle | Classe_id
+----------|------------|------------|---------------|-------|----------
+Lundi     | 08:00-10:00| 1 (Maths)  | 1 (Bennani)   | A101  | 1
+Lundi     | 10:00-12:00| 2 (PC)     | 2 (Alami)     | Lab1  | 1
+Lundi     | 14:00-16:00| 3 (Français)| 3 (Idrissi)  | A102  | 1
+Mardi     | 08:00-10:00| 1 (Maths)  | 1 (Bennani)   | A101  | 1
+Mardi     | 10:00-12:00| 6 (SVT)    | 6 (Benjelloun)| Lab2  | 1
+Mardi     | 14:00-16:00| 4 (Anglais)| 4 (Tazi)      | A103  | 1
+Mercredi  | 08:00-10:00| 2 (PC)     | 2 (Alami)     | Lab1  | 1
+Mercredi  | 10:00-12:00| 5 (Hist-Géo)| 5 (Chakri)   | A102  | 1
+Jeudi     | 08:00-10:00| 1 (Maths)  | 1 (Bennani)   | A101  | 1
+Jeudi     | 10:00-12:00| 7 (Info)   | 7 (Lahlou)    | Info1 | 1
+Jeudi     | 14:00-16:00| 8 (Sport)  | 8 (Mansouri)  | Gym1  | 1
+Vendredi  | 08:00-10:00| 3 (Français)| 3 (Idrissi)  | A102  | 1
+Vendredi  | 10:00-12:00| 6 (SVT)    | 6 (Benjelloun)| Lab2  | 1
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 7: EMPLOI DU TEMPS - Licence Informatique 1 (classe_id: 8)          │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Jour      | Heure      | Matière_id | Enseignant_id | Salle | Classe_id
+----------|------------|------------|---------------|-------|----------
+Lundi     | 08:00-10:00| 11 (Java)  | 7 (Lahlou)    | Info1 | 8
+Lundi     | 10:00-12:00| 11 (Java)  | 7 (Lahlou)    | Info1 | 8
+Lundi     | 14:00-16:00| 12 (BDD)   | 7 (Lahlou)    | Info2 | 8
+Mardi     | 08:00-10:00| 1 (Maths)  | 1 (Bennani)   | C301  | 8
+Mardi     | 10:00-12:00| 12 (BDD)   | 7 (Lahlou)    | Info2 | 8
+Mardi     | 14:00-16:00| 4 (Anglais)| 4 (Tazi)      | A103  | 8
+Mercredi  | 08:00-10:00| 11 (Java)  | 7 (Lahlou)    | Info1 | 8
+Mercredi  | 10:00-12:00| 7 (Info)   | 7 (Lahlou)    | Info1 | 8
+Jeudi     | 08:00-10:00| 12 (BDD)   | 7 (Lahlou)    | Info2 | 8
+Jeudi     | 10:00-12:00| 11 (Java)  | 7 (Lahlou)    | Info1 | 8
+Vendredi  | 08:00-10:00| 1 (Maths)  | 1 (Bennani)   | C301  | 8
+Vendredi  | 10:00-12:00| 8 (Sport)  | 8 (Mansouri)  | Gym1  | 8
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 8: NOTES - Étudiants de 1ère Bac Sciences                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+📌 ÉTUDIANT: Amine BERRADA (ETU001 - etudiant_id: 1)
+-----------------------------------------------------
+Matière_id | Matière          | Note | Type              | Date
+-----------|------------------|------|-------------------|------------
+1          | Mathématiques    | 16.5 | Contrôle Continu  | 2024-10-15
+1          | Mathématiques    | 18.0 | Examen            | 2024-11-20
+2          | Physique-Chimie  | 15.0 | TP                | 2024-10-22
+2          | Physique-Chimie  | 14.5 | Examen            | 2024-11-22
+3          | Français         | 13.0 | Contrôle Continu  | 2024-10-10
+3          | Français         | 14.0 | Examen            | 2024-11-15
+4          | Anglais          | 17.0 | Contrôle Continu  | 2024-10-25
+6          | SVT              | 15.5 | TP                | 2024-10-18
+7          | Informatique     | 19.0 | TP                | 2024-11-05
+
+📌 ÉTUDIANT: Yasmine SQUALLI (ETU002 - etudiant_id: 2)
+-------------------------------------------------------
+Matière_id | Matière          | Note | Type              | Date
+-----------|------------------|------|-------------------|------------
+1          | Mathématiques    | 14.0 | Contrôle Continu  | 2024-10-15
+1          | Mathématiques    | 15.5 | Examen            | 2024-11-20
+2          | Physique-Chimie  | 16.0 | TP                | 2024-10-22
+2          | Physique-Chimie  | 17.0 | Examen            | 2024-11-22
+3          | Français         | 18.0 | Contrôle Continu  | 2024-10-10
+3          | Français         | 17.5 | Examen            | 2024-11-15
+4          | Anglais          | 16.0 | Contrôle Continu  | 2024-10-25
+6          | SVT              | 14.5 | TP                | 2024-10-18
+7          | Informatique     | 15.0 | TP                | 2024-11-05
+
+📌 ÉTUDIANT: Omar FASSI (ETU003 - etudiant_id: 3)
+--------------------------------------------------
+Matière_id | Matière          | Note | Type              | Date
+-----------|------------------|------|-------------------|------------
+1          | Mathématiques    | 12.0 | Contrôle Continu  | 2024-10-15
+1          | Mathématiques    | 13.5 | Examen            | 2024-11-20
+2          | Physique-Chimie  | 11.5 | TP                | 2024-10-22
+2          | Physique-Chimie  | 12.0 | Examen            | 2024-11-22
+3          | Français         | 15.0 | Contrôle Continu  | 2024-10-10
+4          | Anglais          | 14.0 | Contrôle Continu  | 2024-10-25
+6          | SVT              | 13.0 | TP                | 2024-10-18
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 9: NOTES - Étudiants de Licence Informatique 1                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+📌 ÉTUDIANT: Karim BENALI (ETU013 - etudiant_id: 13)
+-----------------------------------------------------
+Matière_id | Matière             | Note | Type              | Date
+-----------|---------------------|------|-------------------|------------
+11         | Programmation Java  | 17.0 | TP                | 2024-10-20
+11         | Programmation Java  | 16.5 | Examen            | 2024-11-25
+12         | Base de Données     | 18.0 | TP                | 2024-10-28
+12         | Base de Données     | 17.5 | Examen            | 2024-11-28
+1          | Mathématiques       | 15.0 | Contrôle Continu  | 2024-10-12
+1          | Mathématiques       | 16.0 | Examen            | 2024-11-18
+4          | Anglais             | 14.0 | Contrôle Continu  | 2024-10-30
+7          | Informatique        | 18.5 | TP                | 2024-11-08
+
+📌 ÉTUDIANT: Leila MOUSSAOUI (ETU014 - etudiant_id: 14)
+--------------------------------------------------------
+Matière_id | Matière             | Note | Type              | Date
+-----------|---------------------|------|-------------------|------------
+11         | Programmation Java  | 19.0 | TP                | 2024-10-20
+11         | Programmation Java  | 18.5 | Examen            | 2024-11-25
+12         | Base de Données     | 17.0 | TP                | 2024-10-28
+12         | Base de Données     | 18.0 | Examen            | 2024-11-28
+1          | Mathématiques       | 16.5 | Contrôle Continu  | 2024-10-12
+1          | Mathématiques       | 17.0 | Examen            | 2024-11-18
+4          | Anglais             | 18.0 | Contrôle Continu  | 2024-10-30
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ DONNÉES 10: COMPTES UTILISATEURS À CRÉER                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+📌 COMPTES PROFESSEURS (à créer après avoir créé les enseignants):
+-------------------------------------------------------------------
+
+1. Utilisateur: ahmed.bennani
+   Email:       ahmed.bennani@ecole.com
+   Mot de passe: prof123
+   Rôle:        PROF
+   ID Référence: 1 (ID de l'enseignant Ahmed BENNANI)
+
+2. Utilisateur: fatima.alami
+   Email:       fatima.alami@ecole.com
+   Mot de passe: prof123
+   Rôle:        PROF
+   ID Référence: 2 (ID de l'enseignant Fatima ALAMI)
+
+3. Utilisateur: naoufal.idrissi
+   Email:       naoufal.idrissi@ecole.com
+   Mot de passe: prof123
+   Rôle:        PROF
+   ID Référence: 3 (ID de l'enseignant Naoufal IDRISSI)
+
+4. Utilisateur: youssef.lahlou
+   Email:       youssef.lahlou@ecole.com
+   Mot de passe: prof123
+   Rôle:        PROF
+   ID Référence: 7 (ID de l'enseignant Youssef LAHLOU)
+
+
+📌 COMPTES ÉTUDIANTS (à créer après avoir créé les étudiants):
+---------------------------------------------------------------
+
+1. Utilisateur: amine.berrada
+   Email:       amine.berrada@etudiant.ecole.com
+   Mot de passe: etudiant123
+   Rôle:        ETUDIANT
+   ID Référence: 1 (ID de l'étudiant Amine BERRADA)
+
+2. Utilisateur: yasmine.squalli
+   Email:       yasmine.squalli@etudiant.ecole.com
+   Mot de passe: etudiant123
+   Rôle:        ETUDIANT
+   ID Référence: 2 (ID de l'étudiant Yasmine SQUALLI)
+
+3. Utilisateur: karim.benali
+   Email:       karim.benali@etudiant.ecole.com
+   Mot de passe: etudiant123
+   Rôle:        ETUDIANT
+   ID Référence: 13 (ID de l'étudiant Karim BENALI)
+
+4. Utilisateur: leila.moussaoui
+   Email:       leila.moussaoui@etudiant.ecole.com
+   Mot de passe: etudiant123
+   Rôle:        ETUDIANT
+   ID Référence: 14 (ID de l'étudiant Leila MOUSSAOUI)
+
+
+================================================================================
+PARTIE 4: ORDRE DE SAISIE RECOMMANDÉ
+================================================================================
+
+ÉTAPE 1: Se connecter en tant qu'ADMIN (admin@ecole.com / admin)
+
+ÉTAPE 2: Créer les ENSEIGNANTS (8 enseignants)
+           ↓
+ÉTAPE 3: Créer les CLASSES (10 classes)
+           ↓
+ÉTAPE 4: Créer les MATIÈRES (12 matières avec enseignant_id)
+           ↓
+ÉTAPE 5: Créer les ÉTUDIANTS (20 étudiants avec classe_id)
+           ↓
+ÉTAPE 6: Créer les SALLES (15 salles)
+           ↓
+ÉTAPE 7: Créer les EMPLOIS DU TEMPS (cours par cours)
+           ↓
+ÉTAPE 8: Créer les NOTES (pour chaque étudiant)
+           ↓
+ÉTAPE 9: Créer les UTILISATEURS (comptes PROF et ETUDIANT)
+           ↓
+ÉTAPE 10: TESTER avec les différents comptes
+
+⚠️ IMPORTANT: Respecter cet ordre car il y a des dépendances (foreign keys)!
+
+
+================================================================================
+PARTIE 5: TESTS FONCTIONNELS DÉTAILLÉS
+================================================================================
+
+✓ TEST 1: Connexion Admin
+  - Email: admin@ecole.com
+  - Password: admin
+  - Résultat: Dashboard Admin avec 8 modules
+
+✓ TEST 2: Statistiques Admin
+  - Vérifier: Total enseignants = 8
+  - Vérifier: Total étudiants = 20
+  - Vérifier: Total classes = 10
+
+✓ TEST 3: Connexion Professeur (Youssef LAHLOU)
+  - Email: youssef.lahlou@ecole.com
+  - Password: prof123
+  - Résultat: Dashboard Professeur avec ses cours
+
+✓ TEST 4: Emploi du Temps Professeur (Youssef LAHLOU)
+  - Cliquer: Mon Emploi du Temps
+  - Vérifier: Uniquement les cours de Java, BDD, et Informatique
+  - Vérifier: Triés par jour puis par heure
+
+✓ TEST 5: Notes Professeur (Youssef LAHLOU)
+  - Cliquer: Mes Notes
+  - Vérifier: Uniquement les notes de SES matières
+  - Vérifier: Possibilité d'ajouter/modifier des notes
+
+✓ TEST 6: Connexion Étudiant (Karim BENALI)
+  - Email: karim.benali@etudiant.ecole.com
+  - Password: etudiant123
+  - Résultat: Dashboard Étudiant avec infos personnelles
+
+✓ TEST 7: Notes Étudiant (Karim BENALI)
+  - Cliquer: Mes Notes
+  - Vérifier: Uniquement SES notes
+  - Vérifier: Moyenne générale calculée
+
+✓ TEST 8: Emploi du Temps Étudiant
+  - Cliquer: Mon Emploi du Temps
+  - Vérifier: Emploi de SA classe (Licence Info 1)
+
+✓ TEST 9: Modification de données
+  - En tant qu'Admin: Modifier un enseignant
+  - Vérifier: Changement répercuté partout
+
+✓ TEST 10: Suppression avec protection
+  - Essayer de supprimer l'admin → Bloqué
+  - Essayer de supprimer un enseignant lié → Message d'erreur
+
+
+================================================================================
+PARTIE 6: PROBLÈMES COURANTS ET SOLUTIONS
+================================================================================
+
+❌ PROBLÈME: "Base de données verrouillée"
+✅ SOLUTION: Fermer toutes les instances de l'application
+
+❌ PROBLÈME: "Emploi du temps vide pour le professeur"
+✅ SOLUTION: Vérifier que l'ID de référence correspond bien à l'enseignant_id
+
+❌ PROBLÈME: "Notes n'apparaissent pas"
+✅ SOLUTION: Vérifier que etudiant_id et matiere_id existent
+
+❌ PROBLÈME: "Impossible de se connecter avec email"
+✅ SOLUTION: Vérifier que l'email est bien renseigné dans la table utilisateurs
+
+❌ PROBLÈME: "Statistiques à 0 sur le dashboard"
+✅ SOLUTION: Recharger la page ou actualiser
+
+
+================================================================================
+PARTIE 7: CHECKLIST AVANT LA PRÉSENTATION
+================================================================================
+
+□ Base de données supprimée et recréée (ecole.db)
+□ Tous les enseignants ajoutés (8)
+□ Toutes les classes créées (10)
+□ Toutes les matières créées (12)
+□ Tous les étudiants inscrits (20)
+□ Toutes les salles créées (15)
+□ Emplois du temps créés (au moins 2 classes)
+□ Notes saisies (au moins 10 étudiants)
+□ Comptes utilisateurs créés (au moins 4 profs + 4 étudiants)
+□ Test de connexion Admin ✓
+□ Test de connexion Prof ✓
+□ Test de connexion Étudiant ✓
+□ Navigation testée dans tous les menus ✓
+□ Statistiques vérifiées ✓
+
+
+================================================================================
+CONCLUSION
+================================================================================
+
+Ce guide vous permet de:
+✅ Tester toutes les fonctionnalités de la plateforme
+✅ Remplir la base de données avec des données réalistes
+✅ Préparer une démonstration complète
+✅ Identifier et résoudre les problèmes courants
+
+Temps estimé pour remplir toutes les données: 45-60 minutes
+
+💡 ASTUCE: Imprimez ce guide et suivez les étapes une par une pendant la saisie!
+
+Bonne chance pour votre présentation! 🎓✨
+
+================================================================================
+FIN DU GUIDE DE TEST
+================================================================================

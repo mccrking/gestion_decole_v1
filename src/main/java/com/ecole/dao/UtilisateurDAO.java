@@ -54,6 +54,7 @@ public class UtilisateurDAO {
                 Utilisateur utilisateur = new Utilisateur();
                 utilisateur.setId(rs.getInt("id"));
                 utilisateur.setNomUtilisateur(rs.getString("nom_utilisateur"));
+                utilisateur.setEmail(rs.getString("email"));
                 utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
                 utilisateur.setRole(rs.getString("role"));
                 utilisateur.setReferenceId(rs.getInt("reference_id"));
@@ -69,16 +70,40 @@ public class UtilisateurDAO {
 
     /**
      * Authentifier un utilisateur par email
-     * Cherche d'abord dans les enseignants puis dans les étudiants
+     * Cherche d'abord dans la table utilisateurs (colonne email), puis par nom_utilisateur, puis dans les tables enseignants/étudiants
      */
     public Utilisateur authentifierParEmail(String email, String motDePasse) {
-        // D'abord, essayer de trouver l'utilisateur avec cet email comme nom d'utilisateur
+        // 1. Chercher directement dans la colonne email de la table utilisateurs
+        String sqlEmail = "SELECT * FROM utilisateurs WHERE email = ? AND mot_de_passe = ?";
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlEmail)) {
+            
+            pstmt.setString(1, email);
+            pstmt.setString(2, motDePasse);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setId(rs.getInt("id"));
+                utilisateur.setNomUtilisateur(rs.getString("nom_utilisateur"));
+                utilisateur.setEmail(rs.getString("email"));
+                utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+                utilisateur.setRole(rs.getString("role"));
+                utilisateur.setReferenceId(rs.getInt("reference_id"));
+                return utilisateur;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'authentification par email : " + e.getMessage());
+        }
+        
+        // 2. Essayer avec l'email comme nom d'utilisateur (rétrocompatibilité)
         Utilisateur utilisateur = authentifier(email, motDePasse);
         if (utilisateur != null) {
             return utilisateur;
         }
         
-        // Sinon, chercher dans la table enseignants
+        // 3. Chercher dans la table enseignants
         String sqlEnseignant = "SELECT e.id, e.nom, e.prenom, e.email FROM enseignants e WHERE e.email = ?";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlEnseignant)) {
@@ -100,6 +125,7 @@ public class UtilisateurDAO {
                         Utilisateur user = new Utilisateur();
                         user.setId(rs2.getInt("id"));
                         user.setNomUtilisateur(rs2.getString("nom_utilisateur"));
+                        user.setEmail(rs2.getString("email"));
                         user.setMotDePasse(rs2.getString("mot_de_passe"));
                         user.setRole(rs2.getString("role"));
                         user.setReferenceId(rs2.getInt("reference_id"));
@@ -134,6 +160,7 @@ public class UtilisateurDAO {
                         Utilisateur user = new Utilisateur();
                         user.setId(rs2.getInt("id"));
                         user.setNomUtilisateur(rs2.getString("nom_utilisateur"));
+                        user.setEmail(rs2.getString("email"));
                         user.setMotDePasse(rs2.getString("mot_de_passe"));
                         user.setRole(rs2.getString("role"));
                         user.setReferenceId(rs2.getInt("reference_id"));

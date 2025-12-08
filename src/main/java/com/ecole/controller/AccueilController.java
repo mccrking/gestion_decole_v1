@@ -19,10 +19,19 @@ public class AccueilController extends BaseController {
     private EnseignantDAO enseignantDAO = new EnseignantDAO();
     private ClasseDAO classeDAO = new ClasseDAO();
     private MatiereDAO matiereDAO = new MatiereDAO();
+    
+    private DashboardController dashboardController;
 
     @FXML
     public void initialize() {
         chargerStatistiques();
+    }
+    
+    /**
+     * Définir le contrôleur parent
+     */
+    public void setDashboardController(DashboardController controller) {
+        this.dashboardController = controller;
     }
 
     /**
@@ -54,22 +63,29 @@ public class AccueilController extends BaseController {
 
     @FXML
     private void ajouterEtudiant() {
-        // Cette fonctionnalité sera implémentée dans EtudiantsController
-        System.out.println("Ajout d'un étudiant");
+        if (dashboardController != null) {
+            dashboardController.showEtudiants();
+        }
     }
 
     @FXML
     private void ajouterEnseignant() {
-        System.out.println("Ajout d'un enseignant");
+        if (dashboardController != null) {
+            dashboardController.showEnseignants();
+        }
     }
 
     @FXML
     private void ajouterClasse() {
-        System.out.println("Ajout d'une classe");
+        if (dashboardController != null) {
+            dashboardController.showClasses();
+        }
     }
 
     @FXML
     private void voirRapports() {
-        System.out.println("Affichage des rapports");
+        if (dashboardController != null) {
+            dashboardController.showRapports();
+        }
     }
 }

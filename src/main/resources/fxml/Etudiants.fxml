@@ -13,7 +13,7 @@
     <!-- Barre d'outils -->
     <HBox spacing="15" alignment="CENTER_LEFT">
         <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success"/>
-        <Button text="✏️ Modifier" onAction="#handleModifier" disable="${tableEtudiants.selectionModel.selectedItem == null}"/>
+        <Button text="✏️ Modifier" onAction="#handleModifier"/>
         <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger"/>
         <Region HBox.hgrow="ALWAYS"/>
         <TextField fx:id="searchField" promptText="🔍 Rechercher un étudiant..." prefWidth="300"/>

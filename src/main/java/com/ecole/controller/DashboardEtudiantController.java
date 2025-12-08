@@ -19,7 +19,8 @@ import java.io.IOException;
 public class DashboardEtudiantController {
 
     @FXML private StackPane contentArea;
-    @FXML private Label userLabel;
+    @FXML private Label titleLabel;
+    @FXML private Label sidebarUserLabel;
     
     @FXML private Button btnAccueil;
     @FXML private Button btnMesNotes;
@@ -33,7 +34,7 @@ public class DashboardEtudiantController {
      */
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateurConnecte = utilisateur;
-        userLabel.setText("Étudiant: " + utilisateur.getNomUtilisateur());
+        sidebarUserLabel.setText("Connecté: " + utilisateur.getNomUtilisateur() + "\nRôle: " + utilisateur.getRole());
         
         // Charger la page d'accueil
         showAccueil();
@@ -45,6 +46,7 @@ public class DashboardEtudiantController {
     @FXML
     private void showAccueil() {
         try {
+            titleLabel.setText("Tableau de bord");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AccueilEtudiant.fxml"));
             Parent view = loader.load();
             
@@ -53,10 +55,23 @@ public class DashboardEtudiantController {
             
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
+            
+            resetButtonStyles();
+            btnAccueil.getStyleClass().add("button-active");
         } catch (IOException e) {
             showError("Erreur", "Impossible de charger la page d'accueil.");
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Réinitialiser les styles des boutons
+     */
+    private void resetButtonStyles() {
+        btnAccueil.getStyleClass().remove("button-active");
+        btnMesNotes.getStyleClass().remove("button-active");
+        btnMonEmploi.getStyleClass().remove("button-active");
+        btnMesInfos.getStyleClass().remove("button-active");
     }
 
     /**
@@ -65,6 +80,7 @@ public class DashboardEtudiantController {
     @FXML
     private void showMesNotes() {
         try {
+            titleLabel.setText("Mes Notes");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NotesEtudiant.fxml"));
             Parent view = loader.load();
             
@@ -73,6 +89,9 @@ public class DashboardEtudiantController {
             
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
+            
+            resetButtonStyles();
+            btnMesNotes.getStyleClass().add("button-active");
         } catch (IOException e) {
             showError("Erreur", "Impossible de charger vos notes.");
             e.printStackTrace();
@@ -85,6 +104,7 @@ public class DashboardEtudiantController {
     @FXML
     private void showMonEmploi() {
         try {
+            titleLabel.setText("Mon Emploi du Temps");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmploiEtudiant.fxml"));
             Parent view = loader.load();
             
@@ -93,6 +113,9 @@ public class DashboardEtudiantController {
             
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
+            
+            resetButtonStyles();
+            btnMonEmploi.getStyleClass().add("button-active");
         } catch (IOException e) {
             showError("Erreur", "Impossible de charger votre emploi du temps.");
             e.printStackTrace();
@@ -105,6 +128,7 @@ public class DashboardEtudiantController {
     @FXML
     private void showMesInfos() {
         try {
+            titleLabel.setText("Mes Informations");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/InfosEtudiant.fxml"));
             Parent view = loader.load();
             
@@ -113,6 +137,9 @@ public class DashboardEtudiantController {
             
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
+            
+            resetButtonStyles();
+            btnMesInfos.getStyleClass().add("button-active");
         } catch (IOException e) {
             showError("Erreur", "Impossible de charger vos informations.");
             e.printStackTrace();

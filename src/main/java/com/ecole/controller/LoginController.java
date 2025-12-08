@@ -107,6 +107,7 @@ public class LoginController {
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Gestion d'École - " + title);
+            stage.setResizable(true);
             stage.setMaximized(true);
 
         } catch (Exception e) {

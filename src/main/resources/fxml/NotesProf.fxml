@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ecole.controller.NotesProfController" 
+      spacing="20" styleClass="content-area">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <!-- En-tête -->
+    <VBox spacing="10">
+        <Label text="📝 Gestion de Mes Notes" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+        
+        <Label fx:id="lblInfo" text="Chargement..." style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+    </VBox>
+    
+    <!-- Barre d'actions -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="➕ Ajouter" onAction="#handleAjouter" styleClass="button-success">
+            <font>
+                <Font name="System Bold" size="13"/>
+            </font>
+        </Button>
+        <Button text="👁️ Détails" onAction="#handleDetails" styleClass="button-info">
+            <font>
+                <Font name="System Bold" size="13"/>
+            </font>
+        </Button>
+        <Button text="✏️ Modifier" onAction="#handleModifier" styleClass="button-info">
+            <font>
+                <Font name="System Bold" size="13"/>
+            </font>
+        </Button>
+        <Button text="🗑️ Supprimer" onAction="#handleSupprimer" styleClass="button-danger">
+            <font>
+                <Font name="System Bold" size="13"/>
+            </font>
+        </Button>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <Button text="🔄 Actualiser" onAction="#handleActualiser" styleClass="button-secondary">
+            <font>
+                <Font name="System Bold" size="13"/>
+            </font>
+        </Button>
+        
+        <Label fx:id="lblTotal" text="Total: 0 note(s)" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+    </HBox>
+    
+    <!-- Tableau des notes -->
+    <TableView fx:id="tableNotes" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50">
+                <cellValueFactory>
+                    <javafx.scene.control.cell.PropertyValueFactory property="id"/>
+                </cellValueFactory>
+            </TableColumn>
+            
+            <TableColumn text="Étudiant ID" prefWidth="100">
+                <cellValueFactory>
+                    <javafx.scene.control.cell.PropertyValueFactory property="etudiantId"/>
+                </cellValueFactory>
+            </TableColumn>
+            
+            <TableColumn text="Note (/20)" prefWidth="100">
+                <cellValueFactory>
+                    <javafx.scene.control.cell.PropertyValueFactory property="note"/>
+                </cellValueFactory>
+            </TableColumn>
+            
+            <TableColumn text="Date" prefWidth="120">
+                <cellValueFactory>
+                    <javafx.scene.control.cell.PropertyValueFactory property="dateEvaluation"/>
+                </cellValueFactory>
+            </TableColumn>
+            
+            <TableColumn text="Type" prefWidth="150">
+                <cellValueFactory>
+                    <javafx.scene.control.cell.PropertyValueFactory property="type"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="💡 Astuce : Double-cliquez sur une note pour voir tous les détails" 
+               style="-fx-text-fill: #2196F3; -fx-font-size: 12px; -fx-font-style: italic; -fx-font-weight: bold;"/>
+        <Label text="•" style="-fx-text-fill: #999;"/>
+        <Label text="Vous ne pouvez gérer que les notes de votre matière assignée." 
+               style="-fx-text-fill: #999; -fx-font-size: 12px; -fx-font-style: italic;"/>
+    </HBox>
+    
+</VBox>

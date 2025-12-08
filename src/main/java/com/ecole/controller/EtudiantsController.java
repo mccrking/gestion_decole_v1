@@ -169,13 +169,19 @@ public class EtudiantsController extends BaseController {
         grid.setPadding(new Insets(20));
 
         TextField nomField = new TextField();
+        nomField.setPromptText("Entrez le nom de famille");
         TextField prenomField = new TextField();
+        prenomField.setPromptText("Entrez le prénom");
         DatePicker dateNaissancePicker = new DatePicker();
+        dateNaissancePicker.setPromptText("JJ/MM/AAAA");
         ComboBox<Classe> classeCombo = new ComboBox<>();
         TextField contactField = new TextField();
+        contactField.setPromptText("Ex: 0612345678");
         TextField emailField = new TextField();
+        emailField.setPromptText("Ex: etudiant@ecole.com");
         TextArea adresseArea = new TextArea();
         adresseArea.setPrefRowCount(3);
+        adresseArea.setPromptText("Adresse complète");
 
         // Charger les classes
         classeCombo.setItems(FXCollections.observableArrayList(classeDAO.obtenirTous()));
@@ -201,19 +207,39 @@ public class EtudiantsController extends BaseController {
         }
 
         // Ajouter les champs au formulaire
-        grid.add(new Label("Nom:"), 0, 0);
+        Label lblNom = new Label("Nom:");
+        lblNom.setStyle("-fx-font-weight: bold;");
+        grid.add(lblNom, 0, 0);
         grid.add(nomField, 1, 0);
-        grid.add(new Label("Prénom:"), 0, 1);
+        
+        Label lblPrenom = new Label("Prénom:");
+        lblPrenom.setStyle("-fx-font-weight: bold;");
+        grid.add(lblPrenom, 0, 1);
         grid.add(prenomField, 1, 1);
-        grid.add(new Label("Date de naissance:"), 0, 2);
+        
+        Label lblDate = new Label("Date de naissance:");
+        lblDate.setStyle("-fx-font-weight: bold;");
+        grid.add(lblDate, 0, 2);
         grid.add(dateNaissancePicker, 1, 2);
-        grid.add(new Label("Classe:"), 0, 3);
+        
+        Label lblClasse = new Label("Classe:");
+        lblClasse.setStyle("-fx-font-weight: bold;");
+        grid.add(lblClasse, 0, 3);
         grid.add(classeCombo, 1, 3);
-        grid.add(new Label("Contact:"), 0, 4);
+        
+        Label lblContact = new Label("Contact:");
+        lblContact.setStyle("-fx-font-weight: bold;");
+        grid.add(lblContact, 0, 4);
         grid.add(contactField, 1, 4);
-        grid.add(new Label("Email:"), 0, 5);
+        
+        Label lblEmail = new Label("Email:");
+        lblEmail.setStyle("-fx-font-weight: bold;");
+        grid.add(lblEmail, 0, 5);
         grid.add(emailField, 1, 5);
-        grid.add(new Label("Adresse:"), 0, 6);
+        
+        Label lblAdresse = new Label("Adresse:");
+        lblAdresse.setStyle("-fx-font-weight: bold;");
+        grid.add(lblAdresse, 0, 6);
         grid.add(adresseArea, 1, 6);
 
         // Boutons

@@ -6,77 +6,74 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.ecole.controller.DashboardEtudiantController" styleClass="root">
+            fx:controller="com.ecole.controller.DashboardEtudiantController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
     
     <!-- Header -->
     <top>
         <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
             <padding>
-                <Insets top="15" right="20" bottom="15" left="20"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
             
-            <Label text="🎓 Espace Étudiant" styleClass="header-title">
-                <font>
-                    <Font name="System Bold" size="24"/>
-                </font>
-            </Label>
-            
-            <Region HBox.hgrow="ALWAYS"/>
-            
-            <VBox alignment="CENTER_RIGHT">
-                <Label fx:id="userLabel" styleClass="user-info">
-                    <font>
-                        <Font size="14"/>
-                    </font>
-                </Label>
-            </VBox>
-            
-            <Button text="Déconnexion" onAction="#handleLogout" styleClass="button, danger-button"/>
+            <Label fx:id="titleLabel" text="Tableau de bord" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
         </HBox>
     </top>
     
     <!-- Sidebar -->
     <left>
-        <VBox styleClass="sidebar" spacing="5" prefWidth="250">
+        <VBox styleClass="sidebar" spacing="10" prefWidth="250">
             <padding>
                 <Insets top="20" right="10" bottom="20" left="10"/>
             </padding>
             
-            <Label text="NAVIGATION" styleClass="sidebar-section">
-                <font>
-                    <Font name="System Bold" size="12"/>
-                </font>
+            <Label text="🎓 ESPACE ÉTUDIANT" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;">
+                <padding>
+                    <Insets bottom="20"/>
+                </padding>
             </Label>
             
-            <Button fx:id="btnAccueil" text="🏠 Accueil" onAction="#showAccueil" 
-                    styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Separator style="-fx-background-color: #455A64;"/>
             
-            <Button fx:id="btnMesNotes" text="📊 Mes Notes" onAction="#showMesNotes" 
-                    styleClass="sidebar-button" maxWidth="Infinity"/>
-            
-            <Button fx:id="btnMonEmploi" text="📅 Mon Emploi du Temps" onAction="#showMonEmploi" 
-                    styleClass="sidebar-button" maxWidth="Infinity"/>
-            
-            <Button fx:id="btnMesInfos" text="👤 Mes Informations" onAction="#showMesInfos" 
-                    styleClass="sidebar-button" maxWidth="Infinity"/>
-            
-            <Region VBox.vgrow="ALWAYS"/>
-            
-            <Label text="Version 1.0" styleClass="sidebar-footer">
-                <font>
-                    <Font size="10"/>
-                </font>
+            <Label fx:id="sidebarUserLabel" style="-fx-text-fill: white; -fx-font-size: 12px;">
+                <padding>
+                    <Insets top="10" bottom="10"/>
+                </padding>
             </Label>
+            
+            <Separator style="-fx-background-color: #455A64;"/>
+            
+            <!-- Menu principal -->
+            <VBox spacing="5" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                
+                <Button fx:id="btnAccueil" text="🏠 Accueil" onAction="#showAccueil" maxWidth="Infinity" styleClass="button-active"/>
+                <Button fx:id="btnMesNotes" text="📊 Mes Notes" onAction="#showMesNotes" maxWidth="Infinity"/>
+                <Button fx:id="btnMonEmploi" text="📅 Mon Emploi du Temps" onAction="#showMonEmploi" maxWidth="Infinity"/>
+                <Button fx:id="btnMesInfos" text="👤 Mes Informations" onAction="#showMesInfos" maxWidth="Infinity"/>
+            </VBox>
+            
+            <Separator style="-fx-background-color: #455A64;"/>
+            
+            <Button text="🚪 Déconnexion" onAction="#handleLogout" maxWidth="Infinity" styleClass="button-danger"/>
         </VBox>
     </left>
     
-    <!-- Content Area -->
+    <!-- Contenu principal -->
     <center>
-        <StackPane fx:id="contentArea" styleClass="content-area">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-        </StackPane>
+        <VBox>
+            <!-- Zone de contenu dynamique -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background: #f5f5f5;">
+                <StackPane fx:id="contentArea" style="-fx-background-color: #f5f5f5;">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                </StackPane>
+            </ScrollPane>
+        </VBox>
     </center>
     
 </BorderPane>

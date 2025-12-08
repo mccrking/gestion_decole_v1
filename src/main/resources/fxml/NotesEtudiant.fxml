@@ -13,32 +13,69 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
     
-    <!-- En-tête -->
-    <HBox alignment="CENTER_LEFT" spacing="20">
+    <!-- En-tête avec moyennes -->
+    <VBox spacing="15">
         <Label text="📊 Mes Notes" styleClass="page-title">
             <font>
                 <Font name="System Bold" size="28"/>
             </font>
         </Label>
         
-        <Region HBox.hgrow="ALWAYS"/>
-        
-        <Label fx:id="lblMoyenne" text="Moyenne: --/20" styleClass="stat-value">
-            <font>
-                <Font name="System Bold" size="18"/>
-            </font>
-        </Label>
-    </HBox>
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <VBox styleClass="stat-card" spacing="5" prefWidth="180">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Contrôles Continus" style="-fx-text-fill: #757575; -fx-font-size: 12px;"/>
+                <Label fx:id="lblMoyenneControles" text="--/20" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+            </VBox>
+            
+            <VBox styleClass="stat-card" spacing="5" prefWidth="180">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Examens" style="-fx-text-fill: #757575; -fx-font-size: 12px;"/>
+                <Label fx:id="lblMoyenneExamens" text="--/20" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+            </VBox>
+            
+            <VBox styleClass="stat-card" spacing="5" prefWidth="200">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Moyenne Générale" style="-fx-text-fill: #757575; -fx-font-size: 12px;"/>
+                <Label fx:id="lblMoyenneGenerale" text="--/20" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FF9800;"/>
+                <Label text="40% Contrôles + 60% Examens" style="-fx-text-fill: #999; -fx-font-size: 10px;"/>
+            </VBox>
+        </HBox>
+    </VBox>
     
-    <!-- Tableau des notes -->
-    <TableView fx:id="tableNotes" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-            <TableColumn fx:id="colMatiere" text="Matière ID" prefWidth="120"/>
-            <TableColumn fx:id="colNote" text="Note (/20)" prefWidth="100"/>
-            <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
-            <TableColumn fx:id="colType" text="Type" prefWidth="150"/>
-        </columns>
-    </TableView>
+    <!-- Tableau des Contrôles -->
+    <VBox spacing="10" VBox.vgrow="ALWAYS">
+        <Label text="📝 Contrôles Continus" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        <TableView fx:id="tableControles" prefHeight="250">
+            <columns>
+                <TableColumn fx:id="colIdControle" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colMatiereControle" text="Matière" prefWidth="200"/>
+                <TableColumn fx:id="colEnseignantControle" text="Enseignant" prefWidth="180"/>
+                <TableColumn fx:id="colNoteControle" text="Note (/20)" prefWidth="100"/>
+                <TableColumn fx:id="colDateControle" text="Date" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </VBox>
+    
+    <!-- Tableau des Examens -->
+    <VBox spacing="10" VBox.vgrow="ALWAYS">
+        <Label text="📋 Examens" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+        <TableView fx:id="tableExamens" prefHeight="250">
+            <columns>
+                <TableColumn fx:id="colIdExamen" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colMatiereExamen" text="Matière" prefWidth="200"/>
+                <TableColumn fx:id="colEnseignantExamen" text="Enseignant" prefWidth="180"/>
+                <TableColumn fx:id="colNoteExamen" text="Note (/20)" prefWidth="100"/>
+                <TableColumn fx:id="colDateExamen" text="Date" prefWidth="120"/>
+                <TableColumn fx:id="colTypeExamen" text="Type" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </VBox>
     
 </VBox>

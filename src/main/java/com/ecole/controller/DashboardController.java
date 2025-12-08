@@ -102,6 +102,11 @@ public class DashboardController {
                 ((BaseController) controller).setUtilisateur(utilisateurConnecte);
             }
             
+            // Passer la référence du DashboardController à AccueilController
+            if (controller instanceof AccueilController) {
+                ((AccueilController) controller).setDashboardController(this);
+            }
+            
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
             
@@ -137,19 +142,19 @@ public class DashboardController {
     }
 
     @FXML
-    private void showEtudiants() {
+    public void showEtudiants() {
         loadView("/fxml/Etudiants.fxml", "Gestion des Étudiants");
         btnEtudiants.getStyleClass().add("button-active");
     }
 
     @FXML
-    private void showEnseignants() {
+    public void showEnseignants() {
         loadView("/fxml/Enseignants.fxml", "Gestion des Enseignants");
         btnEnseignants.getStyleClass().add("button-active");
     }
 
     @FXML
-    private void showClasses() {
+    public void showClasses() {
         loadView("/fxml/Classes.fxml", "Gestion des Classes");
         btnClasses.getStyleClass().add("button-active");
     }
@@ -185,8 +190,8 @@ public class DashboardController {
     }
 
     @FXML
-    private void showRapports() {
-        loadView("/fxml/Rapports.fxml", "Rapports");
+    public void showRapports() {
+        loadView("/fxml/Rapports.fxml", "Rapports et Statistiques");
         btnRapports.getStyleClass().add("button-active");
     }
 

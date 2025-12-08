@@ -66,7 +66,19 @@ public class DashboardProfController {
      */
     @FXML
     public void showMesNotes() {
-        loadView("/fxml/Notes.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NotesProf.fxml"));
+            Parent view = loader.load();
+            
+            NotesProfController controller = loader.getController();
+            controller.setUtilisateur(utilisateurConnecte);
+            
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
+        } catch (IOException e) {
+            showError("Erreur", "Impossible de charger la gestion des notes.");
+            e.printStackTrace();
+        }
     }
 
     /**
